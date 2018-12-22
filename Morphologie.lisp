@@ -2,7 +2,7 @@
 ;;
 ;;            Morphologie
 ;;            by  Jacopo Baboni Schilingi & Frederic Voisin  © IRCAM 1997
-;;	      OM version: 1998	
+;;	          OM version: 1998	
 ;;
 ;;
 
