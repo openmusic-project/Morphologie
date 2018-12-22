@@ -2,7 +2,7 @@
 ;*                                                                                                           *
 ;*                   Jacopo Baboni Schilingi & Frederic VOISIN                                               *
 ;*                                                                                                           *
-;*                               IRCAM, Paris, november 1998.                                                     *
+;*                          IRCAM, Paris, november 1998.                                                     *
 ;*                                                                                                           *
 ;* Fonctions d'analyse, reconnaissance de pattern et classification morphologiques des profiles geometriques *
 ;* Analysis fonctions, pattern recognition and morphological classification of geometric profiles            *
@@ -13,8 +13,6 @@
 (in-package "MORPH")
 
 ;quelques modules -provisoire-
-
-
 
 (defmethod list-part ((list list) &optional (ncol 2)) 
   "partitions <list> in <ncol> lists containing the elements modulo <ncol>"
