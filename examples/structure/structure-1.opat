@@ -1,0 +1,428 @@
+
+(:patch
+ (:om-version 0.03)
+ (:name "structure-1")
+ (:doc "")
+ (:info
+  (:created "2019/09/24 1:19:32")
+  (:modified "2019/09/24 1:27:18"))
+ (:window (:size (609 432)) (:position (656 185)))
+ (:grid nil)
+ (:lock nil)
+ (:boxes
+  (:comment
+   (:x 484)
+   (:y 295)
+   (:w 70)
+   (:h 51)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Geneva") (:size 10) (:style :plain)))
+   (:align nil)
+   (:text "save the analysis in a text file")
+   (:id 0))
+  (:box
+   (:type :function)
+   (:reference (:symbol "STRUCTURE-1" "MORPH"))
+   (:group-id nil)
+   (:name "structure-1")
+   (:x 379)
+   (:y 295)
+   (:w 93)
+   (:h 30)
+   (:color nil)
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:lambda nil)
+   (:inputs
+    (:input
+     (:type :standard)
+     (:name "SEQ")
+     (:value nil)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "alpha?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "lisse?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "result")
+     (:value 2)
+     (:reactive nil)))
+   (:outputs (:output (:name "out") (:reactive nil)))
+   (:id 1))
+  (:comment
+   (:x 203)
+   (:y 296)
+   (:w 139)
+   (:h 96)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Geneva") (:size 10) (:style :plain)))
+   (:align nil)
+   (:text
+    "Gives the same results if smooth menu is \"yes\" : each localy repeted elements are removed in the sequence")
+   (:id 2))
+  (:box
+   (:type :value)
+   (:reference cons)
+   (:group-id nil)
+   (:name "aux2")
+   (:x 40)
+   (:y 219)
+   (:w 302)
+   (:h 52)
+   (:color
+    (:color-or-nil (:color (:color 1.0 1.0 1.0 1.0)) (:t-or-nil t)))
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:inputs)
+   (:outputs (:output (:name "value") (:reactive nil)))
+   (:value
+    (:list
+     a
+     a
+     a
+     b
+     b
+     b
+     c
+     a
+     a
+     b
+     d
+     d
+     d
+     d
+     a
+     b
+     c
+     j
+     h
+     i
+     i
+     i
+     j
+     h
+     i
+     a
+     b
+     d
+     a
+     b
+     c
+     a
+     b
+     c
+     a
+     b
+     d
+     a
+     b
+     c
+     j
+     h
+     i
+     i
+     i
+     i
+     i
+     j
+     j
+     h
+     i
+     a
+     b
+     b
+     b
+     d
+     a
+     a
+     a
+     a
+     a
+     a
+     a
+     a
+     b
+     c
+     c
+     c
+     c
+     c
+     c))
+   (:id 3))
+  (:box
+   (:type :function)
+   (:reference (:symbol "STRUCTURE-1" "MORPH"))
+   (:group-id nil)
+   (:name "structure-1")
+   (:x 97)
+   (:y 296)
+   (:w 93)
+   (:h 30)
+   (:color nil)
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:lambda nil)
+   (:inputs
+    (:input
+     (:type :standard)
+     (:name "SEQ")
+     (:value nil)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "alpha?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "lisse?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "result")
+     (:value 3)
+     (:reactive nil)))
+   (:outputs (:output (:name "out") (:reactive nil)))
+   (:id 4))
+  (:comment
+   (:x 346)
+   (:y 111)
+   (:w 160)
+   (:h 24)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Geneva") (:size 10) (:style :plain)))
+   (:align nil)
+   (:text "<- Number of analysis levels")
+   (:id 5))
+  (:comment
+   (:x 379)
+   (:y 145)
+   (:w 121)
+   (:h 70)
+   (:fgcolor (:color 0 0 0 1.0))
+   (:bgcolor nil)
+   (:border 0)
+   (:roundness nil)
+   (:text-font (:font (:face "Geneva") (:size 10) (:style :plain)))
+   (:align nil)
+   (:text
+    "apply the mark analysis (structure-1) at each level of analysis.")
+   (:id 6))
+  (:box
+   (:type :value)
+   (:reference fixnum)
+   (:group-id nil)
+   (:name "aux1")
+   (:x 310)
+   (:y 115)
+   (:w 32)
+   (:h 30)
+   (:color
+    (:color-or-nil (:color (:color 1.0 1.0 1.0 1.0)) (:t-or-nil t)))
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:inputs)
+   (:outputs (:output (:name "value") (:reactive nil)))
+   (:value 3)
+   (:id 7))
+  (:box
+   (:type :function)
+   (:reference (:symbol "RMA-1" "MORPH"))
+   (:group-id nil)
+   (:name "rma-1")
+   (:x 300)
+   (:y 145)
+   (:w 70)
+   (:h 30)
+   (:color nil)
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:lambda nil)
+   (:inputs
+    (:input
+     (:type :standard)
+     (:name "SEQ")
+     (:value nil)
+     (:reactive nil))
+    (:input
+     (:type :standard)
+     (:name "SMOO1")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :standard)
+     (:name "LEVELS")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "smoo2")
+     (:value 0)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "alpha?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "result")
+     (:value 2)
+     (:reactive nil)))
+   (:outputs (:output (:name "out") (:reactive nil)))
+   (:id 8))
+  (:box
+   (:type :function)
+   (:reference (:symbol "STRUCTURE-1" "MORPH"))
+   (:group-id nil)
+   (:name "structure-1")
+   (:x 186)
+   (:y 145)
+   (:w 93)
+   (:h 30)
+   (:color nil)
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:lambda nil)
+   (:inputs
+    (:input
+     (:type :standard)
+     (:name "SEQ")
+     (:value nil)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "alpha?")
+     (:value 1)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "lisse?")
+     (:value 0)
+     (:reactive nil))
+    (:input
+     (:type :optional)
+     (:name "result")
+     (:value 1)
+     (:reactive nil)))
+   (:outputs (:output (:name "out") (:reactive nil)))
+   (:id 9))
+  (:box
+   (:type :value)
+   (:reference cons)
+   (:group-id nil)
+   (:name "aux")
+   (:x 54)
+   (:y 51)
+   (:w 292)
+   (:h 44)
+   (:color
+    (:color-or-nil (:color (:color 1.0 1.0 1.0 1.0)) (:t-or-nil t)))
+   (:border nil)
+   (:roundness nil)
+   (:text-font nil)
+   (:align nil)
+   (:lock nil)
+   (:inputs)
+   (:outputs (:output (:name "value") (:reactive nil)))
+   (:value
+    (:list
+     a
+     b
+     c
+     a
+     b
+     d
+     a
+     b
+     c
+     j
+     h
+     i
+     j
+     h
+     i
+     a
+     b
+     d
+     a
+     b
+     c
+     a
+     b
+     c
+     a
+     b
+     d
+     a
+     b
+     c
+     j
+     h
+     i
+     j
+     h
+     i
+     a
+     b
+     d
+     a
+     b
+     c))
+   (:id 10)))
+ (:connections
+  (:connection
+   (:from (:box 3 :out 0))
+   (:to (:box 1 :in 0))
+   (:attributes (:color nil :style nil :modif nil)))
+  (:connection
+   (:from (:box 3 :out 0))
+   (:to (:box 4 :in 0))
+   (:attributes (:color nil :style nil :modif nil)))
+  (:connection
+   (:from (:box 7 :out 0))
+   (:to (:box 8 :in 2))
+   (:attributes (:color nil :style nil :modif nil)))
+  (:connection
+   (:from (:box 10 :out 0))
+   (:to (:box 8 :in 0))
+   (:attributes (:color nil :style nil :modif nil)))
+  (:connection
+   (:from (:box 10 :out 0))
+   (:to (:box 9 :in 0))
+   (:attributes (:color nil :style nil :modif nil)))))
