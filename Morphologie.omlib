@@ -1,0 +1,81 @@
+
+(:om-lib
+ 
+ (:version 1.1)
+
+ (:doc "Analysis fonctions, pattern recognition and morphological classification of geometric profiles.")
+
+ (:author "Jacopo Baboni Schilingi & Frederic Voisin, IRCAM 1997/1998.")
+
+ (:source-files "sources/morphologie")
+
+ (:symbols
+  (:packages
+   (:package 
+    (:name "Analysis") 
+    (:functions 
+     "morph::ptrn-recogn"
+     "morph::ptrn-recogn-ctrl"
+     "morph::ptrn-reson"
+     "morph::ptrn-smooth"
+     "morph::ins-ptrn"
+     "morph::min-flex-max"
+     "morph::direct-analysis"))
+  
+   (:package 
+    (:name"Structure") 
+    (:functions 
+     "morph::structure-1"
+     "morph::RMA-1"
+     "morph::rma-1-scores"
+     "morph::structure-2"))
+    
+   (:package 
+    (:name"Reconstitute")
+    (:functions 
+     "morph::1-0-1-reconst"
+     "morph::reconstitute"))
+
+   (:package 
+    (:name"Distance")
+    (:functions 
+     "morph::euclidian-d"
+     "morph::distance"
+     "morph::ldl-distance"
+     "morph::multi-distance"
+     "morph::prim-tree"
+     "morph::draw-tree"))
+
+   (:package 
+    (:name"Classification") 
+    (:functions 
+     "morph::s-class"
+     "morph::class-1"
+     "morph::aver-class"
+     "morph::quantize-1"
+     "morph::class-center"
+     "morph::matrix-center"
+     "morph::meta-class1"
+     "morph::norm-class"
+     "morph::P-class"
+     "morph::res-class"
+     "morph::E-shannon"
+     "morph::e-test"))
+        
+   (:package 
+    (:name"Utilities") 
+    (:functions 
+     "morph::delta"
+     "morph::smooth"
+     "morph::midiseq->alpha"
+     "morph::to-flag"
+     "morph::rep-by-flag"
+     "morph::mc->alpha"
+     "morph::num->alpha"
+     "morph::str->symb"
+     "morph::concatstrings"
+     "morph::l-matrix"))
+   ))
+ )
+
+

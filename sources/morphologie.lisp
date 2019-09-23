@@ -9,23 +9,12 @@
 ;*                                                                                                           *
 ;*************************************************************************************************************
  
-(defpackage "MORPH")
+(defpackage "MORPH"
+  (:use "COMMON-LISP" "CL-USER"))
+
 (in-package "MORPH")
 
 ;quelques modules -provisoire-
-
-(defmethod list-part ((list list) &optional (ncol 2)) 
-  "partitions <list> in <ncol> lists containing the elements modulo <ncol>"
-  (let ((vector (make-array  ncol )) res)
-    (om::while list 
-           (om::for (i 0 1 (1- ncol))
-             (and list (om::vset vector i (push (pop list) (om::vref vector i))))))
-    (om::for (i 0 1 (1- ncol))
-      (push (remove nil (nreverse (om::vref vector i))) res))
-    (nreverse res)))
-
-(defmethod list-modulo ((list list) &optional (ncol 2)) 
-  (list-part list ncol))
 
 (defun less-deep-mapcar (fun  list? &rest args)
   "Applies <fun> to <list?> <args> if <list?> is a one-level list .
@@ -147,9 +136,11 @@
   (let ((ris nil)
         (x (scom lista n))
         y)
-    (om::while x
-      (when (find  (setf y (pop x)) x :test 'equal)
-        (push y ris))) (reverse ris)))
+    (loop while x
+          do (when (find  (setf y (pop x)) x :test 'equal)
+               (push y ris))) (reverse ris)
+    ))
+
 ;
 ;
 ;--------------------------------------
@@ -216,7 +207,7 @@
         (x (risperiamo lista n))
         y)
     
-    (om::while x
+    (loop while x do 
       (if (find (setf y (pop x)) x :test 'equal)
         (push y ris))) (nreverse ris)))
 ;
@@ -421,6 +412,7 @@ A matrix of distances"
 (defun list-char-score (lcs)
   (setf (car lcs) (list (make-string 1 :initial-element (car lcs)) (cadr lcs))))
 
+
 (defun posofspaces (string)
   (let ((pos ()))
     (dotimes (n (length string) (nreverse (append (list (length string)) pos)))
@@ -452,12 +444,12 @@ A matrix of distances"
 "Converts string or list of strings or list of list of strings into list (list of list) of symbols."
   (if (listp string)
     (cond ((equal 'nil (member 'nil (mapcar #'stringp string)))
-           (mapcar #'(lambda (st) (read-from-string st :start 0 :end (length st)))
+           (mapcar #'(lambda (st) (read-from-string st t nil :start 0 :end (length st)))
                    string))
           ((equal 'nil (member 'nil (mapcar #'listp string)))
            (let ((r ()))
              (dolist (st string (nreverse r))
-               (push (mapcar #'(lambda (s) (read-from-string s :start 0 :end (length s)))
+               (push (mapcar #'(lambda (s) (read-from-string s t nil :start 0 :end (length s)))
                                st) r)))))
   (when (stringp string)
     (readst string))))
@@ -611,7 +603,7 @@ A matrix of distances"
       (setf c (segnum1 s))
       (setf a (remove-duplicates (om::flat-once (car c))))
       (setf b (cdr c))
-      (setf a (om::mat-trans (reverse (list-modulo a 2))))
+      (setf a (om::mat-trans (reverse (om::list-modulo a 2))))
       (push (list a (car b)) res))
     (list (car list) (reverse res))))
 
@@ -667,21 +659,21 @@ A matrix of distances"
   :initvals '(nil 1 1 1)
   :icon 128
   :doc  "Donne toutes les structures possibles d'une sequence de nombres ou de symboles 
-selon une segmentation contrastive.
+ selon une segmentation contrastive.
 
-INPUT
-seq : sequence de symboles ou nombres (liste);
-alpha? : resultat en mode alphabetique ou numerique (YES NO), optional;
-lisse? : suppression des elts concomitents identiques dans seq (YES, NO), optional.
-result : short = liste des criteres de segmentation et leur segmentation respective;
+ INPUT
+ seq : sequence de symboles ou nombres (liste);
+ alpha? : resultat en mode alphabetique ou numerique (YES NO), optional;
+ lisse? : suppression des elts concomitents identiques dans seq (YES, NO), optional.
+ result : short = liste des criteres de segmentation et leur segmentation respective;
          exten = analyse detaillee;
          save  = analyse detaillee ecrite en un fichier texte.
 
-OUTPUT
-en mode short, pour le traitement de l'analyse, liste de liste selon le format :
+ OUTPUT
+ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
 
-((criteres de segmentation)
-(forme selon critere)...)"
+ ((criteres de segmentation)
+ (forme selon critere)...)"
   
   (let ((seg ())
         (res ())
@@ -692,7 +684,7 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
     (when (eq result 2)
       (setf out-file (om::om-choose-new-file-dialog
                       :prompt "Structure-1 Mark Analysis"
-                      :button-string "save as")))
+                      )))
     (if (eq lisse? 1)
       (setf seg (group (seg/contrast (lisse seq))))
       (setf seg (group (seg/contrast seq))))
@@ -704,14 +696,15 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
     (cond ((eq result 1)
            (view-str-1 seq res seg alpha? 't date run-time))
           ((eq result 2)
-           (format t "Writing marker analysis in file : ~S...~%" out-file)
-           (with-open-file (out-st out-file                          
-                                   :direction :output
-                                   :if-exists :supersede
-                                   :if-does-not-exist :create)
-             (view-str-1 seq res seg alpha? out-st date run-time))
+           (when out-file 
+             (format t "Writing marker analysis in file : ~S...~%" out-file)
+             (with-open-file (out-st out-file                          
+                                     :direction :output
+                                     :if-exists :supersede
+                                     :if-does-not-exist :create)
+               (view-str-1 seq res seg alpha? out-st date run-time))
            ;(set-mac-file-creator out-file 'ttxt)
-           (format t "DONE~%"))
+             (format t "DONE~%")))
           ((eq result 0)
            (format t "~%   Marker analysis (computation time = ~S s.) :~%" run-time)
            (if (eq alpha? 0)
@@ -742,9 +735,6 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
             (take-criteria analysis)
             (take-patterns analysis))))
 
-(defun take-result-of-ac (seq lisse?)
-  (multiple-value-bind (structs ptrns crits)  (analyse-contrastive seq lisse?)
-    (list structs ptrns crits)))
        
 (defun convert-to-alpha (list-of-numbers)
   (let ((string (make-string (1- (* 2 (length list-of-numbers)))
@@ -806,7 +796,6 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
 "Catchs the results of fonction #'analyse-contrastive."
   (multiple-value-bind (structs crits ptrns)  (analyse-contrastive seq lisse?)
     (list structs crits ptrns)))
-
 
 
 (defun ac+complete (seq lisse1 prof level lisse2 arbores)
@@ -1102,13 +1091,6 @@ out-st is the output stream ('t or file)."
          (format t "~% Error : scores-level-0 : bad form on structures for level 0.~%")
          (abort))))
 
-(defun string-to-list (string)
-  (let ((lstring ()))
-    (dotimes (n (length string) (nreverse lstring))
-        (push (elt string n) lstring))))
-
-(defun list-char-score (lcs)
-  (setf (car lcs) (list (make-string 1 :initial-element (car lcs)) (cadr lcs))))
 
 
 (om::defmethod! rma-1-scores ((structures list))
@@ -1516,7 +1498,7 @@ of n-max (max number of patterns combined in each structure"
     (when (= result 4)
       (setf out-file (om::om-choose-new-file-dialog
                       :prompt "Structure-2 pattern analysis"
-                      :button-string "save as")))
+                      )))
     (setf pos-patterns (pos-ptrn-l list-patterns seq))
     (cond ((eq result 1)
            pos-patterns)
@@ -1548,14 +1530,17 @@ of n-max (max number of patterns combined in each structure"
                         ((eq result 0)
                          (to-stream seq list-patterns seuil formes completion-patterns 't date run-time))
                         ((eq result 4)
-                         (print (format nil "Writing Structure-2 analysis in file : ~S...~%" out-file))
-                         (with-open-file (out-st out-file                          
-                                                 :direction :output
-                                                 :if-exists :supersede
-                                                 :if-does-not-exist :create)
-                           (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))
-                        
-                         ))))))))
+                         (when out-file
+                           (print (format nil "Writing Structure-2 analysis in file : ~S...~%" out-file))
+                           (with-open-file (out-st out-file                          
+                                                   :direction :output
+                                                   :if-exists :supersede
+                                                   :if-does-not-exist :create)
+                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))
+                           )
+                         )))
+                 )))
+    ))
 
 (om::defmethod! forma ((analys list) (seq list) (seuil number))
   
@@ -4999,30 +4984,31 @@ analyse-contrastive =>
 ;************************ NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ********************
 ;************************ NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ********************
 
-(om::defmethod! draw-tree ((tree list))
-:doc "Draw in a new window a graphic representation of the tree.
-Tree : tree list from Prim-tree"
-:icon 128
-  (om::om-make-window 'tree-window :tree tree))
+(defclass tree-window (om::om-window) ()) 
 
-(defclass tree-window (om::om-window) 
+(defclass tree-view (om::om-view) 
   ((tree :initform nil :initarg :tree :accessor tree)) )
 
-(defmethod om::om-draw-contents ((self tree-window))
-  (call-next-method)
-  (let ((h (om::om-point-h (om::om-view-size self)))
-        (v (om::om-point-v (om::om-view-size self))))
-    ;(om::om-with-focused-view self
-    ;  (om::om-erase-rect-content 0 0 h v))
-    ;(om::om-set-font self (om::om-make-font "times" 10))
-    (make-graph-tree self (tree self))))
 
-(defmethod om::om-resize-window ((self tree-window) where)
-  (call-next-method)
-  (om::om-invalidate-view self))
+(om::defmethod! draw-tree ((tree list))
+  :doc "Draw in a new window a graphic representation of the tree.
+Tree : tree list from Prim-tree"
+  :icon 128
+  (oa::om-show-window 
+   (oa::om-make-window 'tree-window 
+                       :subviews (list (oa::om-make-view 'tree-view :tree tree))
+                       :size (oa::om-make-point 500 500)
+                       )))
 
-(defun draw-string (x y str)
-  (om::om-draw-string x y str))
+(defmethod om::om-draw-contents ((self tree-view)) 
+  (call-next-method)
+  (make-graph-tree self (tree self)))
+
+(defmethod om::om-window-resized ((self tree-window) size)
+  (call-next-method)
+  (oa::om-set-view-size (car (oa::om-subviews self)) size)
+  (om::om-invalidate-view (car (oa::om-subviews self))))
+
 
 (defun sommet-p (n tree)
 "n is a list from tree, i.e. (a b distance)
@@ -5161,30 +5147,24 @@ and looks if a or b is a peak in tree"
                                   (list (car a)
                                         (+ 20 (* scale (- (cadr a) minx))) 
                                         (+ 20 (* scale (- (caddr a) miny))))) coordinates))
-    ;(om::om-set-view-size window (om::om-make-point (+ (round (apply #'max (mapcar #'cadr coordinates))) 20)
-    ;                                            (+ (round (apply #'max (mapcar #'caddr coordinates))) 20)))
-    (om::om-with-focused-view window      
+    (oa::om-with-focused-view window   
       ;;first place points in the window
       (dolist (coord coordinates)
-        (draw-string
+        (om::om-draw-string
          (+ *eps* (round (+ morph::*x* (cadr coord))))
          (- (round (+ morph::*y* (caddr coord))) morph::*eps*)
          (if (stringp (car coord))
            (car coord)
-           (symbol-name (car coord)))))
+           (symbol-name (car coord)))
+         ))
       ;;then draw lines
       (dolist (pt ntree)
-          (let ((co1 (take-coord (car pt) coordinates))
-                (co2 (take-coord (cadr pt) coordinates)))
-;;;          (move-to window
-;;;                   (round (+ morph::*x* (car co1)))
-;;;                   (round (+ morph::*y* (cadr co1))))
-;;;          (line-to window
-;;;                    (round (+ morph::*x* (car co2)))
-;;;                        (round (+ morph::*y* (cadr co2))))
-            (om::om-draw-line (round (+ morph::*x* (car co1))) (round (+ morph::*y* (cadr co1)))
-                                                (round (+ morph::*x* (car co2))) (round (+ morph::*y* (cadr co2))))
-            )))))
+        (let ((co1 (take-coord (car pt) coordinates))
+              (co2 (take-coord (cadr pt) coordinates)))
+          (om::om-draw-line (round (+ morph::*x* (car co1))) (round (+ morph::*y* (cadr co1)))
+                            (round (+ morph::*x* (car co2))) (round (+ morph::*y* (cadr co2))))
+          ))
+      )))
 
 (defun etiquet (list)
   (let ((set (remove-duplicates (reverse list) :from-end '0 :test #'equalp)))
@@ -5230,11 +5210,12 @@ and looks if a or b is a peak in tree"
     (values (reverse list) (reverse bag))))
 #|
 (to-flag '(1 2 g 8 tre (5 8) (5 8) tre g 8 1 2 2))
-|#
 
 (om::defmethod! to-flag ((list list))
   :icon 128
   (select-from-list *parameters* (symbol-name database)))
+|#
+
 
 (defun rep-by-flag1 (dist list flags)
   (dotimes (n (length list) dist)
