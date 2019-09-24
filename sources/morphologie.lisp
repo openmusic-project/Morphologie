@@ -2,7 +2,7 @@
 ;*                                                                                                           *
 ;*                   Jacopo Baboni Schilingi & Frederic VOISIN                                               *
 ;*                                                                                                           *
-;*                          IRCAM, Paris, november 1998.                                                     *
+;*                          IRCAM, Paris, november 1998 - revisited in 2019 by Fred Voisin                   *
 ;*                                                                                                           *
 ;* Fonctions d'analyse, reconnaissance de pattern et classification morphologiques des profiles geometriques *
 ;* Analysis fonctions, pattern recognition and morphological classification of geometric profiles            *
@@ -1531,16 +1531,12 @@ of n-max (max number of patterns combined in each structure"
                          (to-stream seq list-patterns seuil formes completion-patterns 't date run-time))
                         ((eq result 4)
                          (when out-file
-                           (print (format nil "Writing Structure-2 analysis in file : ~S...~%" out-file))
+                           (format t "Writing Structure-2 analysis in file : ~S...~%" out-file)
                            (with-open-file (out-st out-file                          
                                                    :direction :output
                                                    :if-exists :supersede
                                                    :if-does-not-exist :create)
-                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))
-                           )
-                         )))
-                 )))
-    ))
+                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)) ) )))))))
 
 (om::defmethod! forma ((analys list) (seq list) (seuil number))
   
@@ -1730,10 +1726,8 @@ The classe number is arbitrary"
         (format t "~&Moving classes iter # ~S..." (1+ cnt))
         (format t "~%Classes :~S~%" classes)
         (format t "~%Centers are :~S~%~%" centres))
-        
         (when (> cnt 0)
-          (setf centres (centre-classes matrix classes *m* *n* *n-cl*)))
-        
+          (setf centres (centre-classes matrix classes *m* *n* *n-cl*)))        
         (when (and (= cnt 0) (not (equal centers 'nil)))
           (setf centres centers))
         (setf d-centres (dist-grav2 matrix centres *m* *n* *n-cl*))
@@ -1765,8 +1759,7 @@ The classe number is arbitrary"
                  (setf classes (reverse new-classes))
                  (setf endtest 1))
                 (t (setf endtest 0)))))))
-            
-        
+
 
 #|
 (setq mattest #2a((0 0) (1 1) (.5 .5) (5 6) (4 5) (4 7) (1 0)
@@ -1778,9 +1771,10 @@ The classe number is arbitrary"
 
 
 (defun centre-gravite (X)
-  (let (sum g
-            (n (nth 1 (array-dimensions X)))
-            (m (nth 0 (array-dimensions X))))
+  (let (sum
+        g
+        (n (nth 1 (array-dimensions X)))
+        (m (nth 0 (array-dimensions X))))
     (setq g (make-array (list 1 n)))
     (dotimes (i n g)
       (setf sum 0)
@@ -1914,18 +1908,18 @@ The classe number is arbitrary"
     (dotimes (b *n-cl* centres)
       (setf c 0)
       (dolist (a classes)
-        (cond ((eq a b)
-               (setf c (+ c 1)))))
-      (setf nuage (make-array (list c *n*)))
+        (when (eq a b)
+          (setf c (+ c 1)))
+        (setf nuage (make-array (list c *n*))))
       ;-- place chaque point de X dans la matrice
       ;   de la classe attribuee --
       (setf point 0)
       (dotimes (a *m*)
-        (cond ((eq (nth a classes) b)
-               (setf point (+ point 1))
-               (dotimes (d *n*)
-                 (setf (aref nuage (- point 1) d) (aref X a d)))
-               (setf tc (centre-gravite nuage)))))
+        (when (eq (nth a classes) b)
+          (setf point (+ point 1))
+          (dotimes (d *n*)
+            (setf (aref nuage (1- point) d) (aref X a d)))))
+      (setf tc (centre-gravite nuage))
       (dotimes (d *n*)
         (setf (aref centres b d) (aref tc 0 d))))))
 
@@ -1936,31 +1930,10 @@ The classe number is arbitrary"
            liste of classes founded for each point (line in matrix);
            Classes must be in numerical representation.
    output = matrix of classes centers."
-  (let (nuage point c tc centres
-              (*n-cl* (length (remove-duplicates classes)))
-              (*m* (nth 0 (array-dimensions matrix)))
-              (*n* (nth 1 (array-dimensions matrix))))
-    (setf centres (make-array (list *n-cl* *n*)))
-    "-- compte le nbre de points pour chaque classes
-     pour construire la matrice de chaque nuage-classe --"
-    (dotimes (b *n-cl* centres)
-      (setf c 0)
-      (dolist (a classes)
-        (cond ((eq a b)
-               (setf c (+ c 1)))))
-      (setf nuage (make-array (list c *n*)))
-      ;-- place chaque point de matrix dans la matrice
-      ;   de la classe attribuee --
-      (setf point 0)
-      (dotimes (a *m*)
-        (cond ((eq (nth a classes) b)
-               (setf point (+ point 1))
-               (dotimes (d *n*)
-                 (setf (aref nuage (- point 1) d) (aref matrix a d)))
-               (setf tc (centre-gravite nuage)))))
-      (dotimes (d *n*)
-        (setf (aref centres b d) (aref tc 0 d))))))
-
+  (let ((*n-cl* (length (remove-duplicates classes)))
+        (*m* (nth 0 (array-dimensions matrix)))
+        (*n* (nth 1 (array-dimensions matrix))))
+    (centre-classes matrix classes *m* *n* *n-cl*)))
 
 (defun dist-grav2 (X centres *m* *n* *n-cl*)
   "input = matrice des points
