@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 1:19:33")
-  (:modified "2019/09/24 1:26:41"))
+  (:modified "2019/09/25 14:07:21"))
  (:window (:size (736 492)) (:position (353 193)))
  (:grid nil)
  (:lock nil)
@@ -66,7 +66,7 @@
    (:group-id nil)
    (:name "mat-trans")
    (:x 461)
-   (:y 219)
+   (:y 217)
    (:w 86)
    (:h 30)
    (:color nil)
@@ -85,6 +85,7 @@
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 3))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STR->SYMB" "MORPH"))
    (:group-id nil)
@@ -109,6 +110,7 @@
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 4))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-2" "MORPH"))
    (:group-id nil)
@@ -221,6 +223,7 @@
     "Return the position where each pattern found starts in the sequence")
    (:id 9))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-2" "MORPH"))
    (:group-id nil)
@@ -319,6 +322,7 @@
    (:value 5)
    (:id 13))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-2" "MORPH"))
    (:group-id nil)

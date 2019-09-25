@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 1:19:32")
-  (:modified "2019/09/24 1:27:18"))
+  (:modified "2019/09/25 14:07:28"))
  (:window (:size (609 432)) (:position (656 185)))
  (:grid nil)
  (:lock nil)
@@ -24,12 +24,13 @@
    (:text "save the analysis in a text file")
    (:id 0))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-1" "MORPH"))
    (:group-id nil)
    (:name "structure-1")
    (:x 379)
-   (:y 295)
+   (:y 297)
    (:w 93)
    (:h 30)
    (:color nil)
@@ -169,6 +170,7 @@
      c))
    (:id 3))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-1" "MORPH"))
    (:group-id nil)
@@ -255,6 +257,7 @@
    (:value 3)
    (:id 7))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "RMA-1" "MORPH"))
    (:group-id nil)
@@ -304,6 +307,7 @@
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 8))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "STRUCTURE-1" "MORPH"))
    (:group-id nil)

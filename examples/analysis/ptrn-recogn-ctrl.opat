@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:34:20")
-  (:modified "2019/09/24 0:36:55"))
+  (:modified "2019/09/25 14:05:36"))
  (:window (:size (500 400)) (:position (232 230)))
  (:grid nil)
  (:lock nil)
@@ -31,6 +31,7 @@
    (:value 3)
    (:id 0))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "PTRN-RECOGN-CTRL" "MORPH"))
    (:group-id nil)
@@ -69,8 +70,8 @@
    (:text "recognises patterns with a given lenght")
    (:id 2))
   (:comment
-   (:x 175)
-   (:y 39)
+   (:x 181)
+   (:y 42)
    (:w 109)
    (:h 38)
    (:fgcolor (:color 0 0 0 1.0))

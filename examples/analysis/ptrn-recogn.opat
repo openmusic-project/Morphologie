@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:34:20")
-  (:modified "2019/09/24 0:35:45"))
+  (:modified "2019/09/25 14:05:41"))
  (:window (:size (461 440)) (:position (295 299)))
  (:grid nil)
  (:lock nil)
@@ -27,8 +27,8 @@
 In order to ameliorate the display, please select the listener window,type : (in-package :common-lisp-user) then return.")
    (:id 0))
   (:comment
-   (:x 215)
-   (:y 66)
+   (:x 216)
+   (:y 67)
    (:w 122)
    (:h 46)
    (:fgcolor (:color 0 0 0 1.0))
@@ -134,6 +134,7 @@ In order to ameliorate the display, please select the listener window,type : (in
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 5))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "PTRN-RECOGN" "MORPH"))
    (:group-id nil)

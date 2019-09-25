@@ -5,14 +5,14 @@
  (:doc "")
  (:info
   (:created "2019/09/24 1:18:23")
-  (:modified "2019/09/24 1:18:35"))
+  (:modified "2019/09/25 14:06:49"))
  (:window (:size (602 487)) (:position (169 138)))
  (:grid nil)
  (:lock nil)
  (:boxes
   (:comment
    (:x 362)
-   (:y 329)
+   (:y 330)
    (:w 114)
    (:h 80)
    (:fgcolor (:color 0 0 0 1.0))
@@ -65,7 +65,7 @@
     (:output (:name "SELF") (:reactive nil))
     (:output (:name "X-POINTS") (:reactive nil))
     (:output (:name "Y-POINTS") (:reactive nil)))
-   (:window (:size nil) (:position nil))
+   (:window (:size (nil nil)) (:position (nil nil)))
    (:edition-params)
    (:value
     (:object
@@ -209,7 +209,7 @@
     (:output (:name "SELF") (:reactive nil))
     (:output (:name "X-POINTS") (:reactive nil))
     (:output (:name "Y-POINTS") (:reactive nil)))
-   (:window (:size nil) (:position nil))
+   (:window (:size (nil nil)) (:position (nil nil)))
    (:edition-params)
    (:value
     (:object
@@ -313,6 +313,7 @@
        (:interpol (:number-or-nil (:number 50) (:t-or-nil nil)))))))
    (:id 2))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "1-0-1-RECONST" "MORPH"))
    (:group-id nil)
@@ -337,6 +338,7 @@
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 3))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "DIRECT-ANALYSIS" "MORPH"))
    (:group-id nil)
@@ -548,7 +550,7 @@
     (:output (:name "LOFFSET") (:reactive nil))
     (:output (:name "LDUR") (:reactive nil))
     (:output (:name "lchan") (:reactive nil)))
-   (:window (:size nil) (:position nil))
+   (:window (:size (nil nil)) (:position (nil nil)))
    (:edition-params (:staff :g))
    (:value
     (:object
