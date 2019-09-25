@@ -1454,14 +1454,14 @@ Optional-2:
 
 (om::defmethod! structure-2 ((seq list) (n-max integer) 
                              alpha? result 
-                             &optional (length nil) (seuil 10)) 
+                             &optional (length nil) (seuil 10))
   :menuins '((2 (("alpha" 1)
-                ("num"  0)))
-            (3 (("extended" 0)
-                ("pos" 1)
-                ("mat" 2)
-                ("p-score" 3)
-                ("save" 4))))
+                 ("num"  0)))
+             (3 (("extended" 0)
+                 ("pos" 1)
+                 ("mat" 2)
+                 ("p-score" 3)
+                 ("save" 4))))
   :initvals '(nil 10 1 0 nil 10)
   :icon 128
   :doc "INPUT
@@ -1484,17 +1484,16 @@ Returns an analysis of seq following the repetition criterium for segmentation.
 
 Note : if out-of memory, try successives computations with a smaller value
 of n-max (max number of patterns combined in each structure"
- 
-    (let ((list-patterns (remove-duplicates (pattern-ridond seq length) :test 'equal))
-          (date (take-date))
-          (time-start (get-internal-real-time))
-          (run-time 0)
-          pos-patterns
-          mat-bin-patterns
-          completion-patterns
-          formes
-          out-file
-          cnp)
+  (let ((list-patterns (remove-duplicates (pattern-ridond seq length) :test 'equal))
+        (date (take-date))
+        (time-start (get-internal-real-time))
+        (run-time 0)
+        pos-patterns
+        mat-bin-patterns
+        completion-patterns
+        formes
+        out-file
+        cnp)
     (when (= result 4)
       (setf out-file (om::om-choose-new-file-dialog
                       :prompt "Structure-2 pattern analysis"
@@ -1536,7 +1535,7 @@ of n-max (max number of patterns combined in each structure"
                                                    :direction :output
                                                    :if-exists :supersede
                                                    :if-does-not-exist :create)
-                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)) ) )))))))
+                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)) ) ))))))))
 
 (om::defmethod! forma ((analys list) (seq list) (seuil number))
   
@@ -2895,7 +2894,7 @@ returns
 ;--------------------------------------
 ;
 ;
-(om::defmethod! reconst-prim ((list list) (start list)) list
+(om::defmethod! reconst-prim ((list list) (start list))
             
             "Ricostruisce la lista usando min, max, flex 
              più eventualmente l'indice di profondita"
