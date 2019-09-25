@@ -5,8 +5,8 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:37:59")
-  (:modified "2019/09/24 0:50:17"))
- (:window (:size (1305 650)) (:position (617 330)))
+  (:modified "2019/09/25 13:59:18"))
+ (:window (:size (1044 603)) (:position (615 330)))
  (:grid nil)
  (:lock nil)
  (:boxes
@@ -57,7 +57,7 @@
     (:output (:name "X-POINTS") (:reactive nil))
     (:output (:name "Y-POINTS") (:reactive nil))
     (:output (:name "decimals") (:reactive nil)))
-   (:window (:size nil) (:position nil))
+   (:window (:size (nil nil)) (:position (nil nil)))
    (:edition-params)
    (:value
     (:object
@@ -1340,6 +1340,7 @@ But the clouds at the input are homogeneous :
 100 points each")
    (:id 4))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -1422,6 +1423,7 @@ But the clouds at the input are homogeneous :
    (:value 3)
    (:id 8))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "META-CLASS1" "MORPH"))
    (:group-id nil)
@@ -1435,7 +1437,7 @@ But the clouds at the input are homogeneous :
    (:roundness nil)
    (:text-font nil)
    (:align nil)
-   (:lock :locked)
+   (:lock nil)
    (:lambda nil)
    (:inputs
     (:input
@@ -1596,6 +1598,33 @@ But the clouds at the input are homogeneous :
      (:lock nil)
      (:boxes
       (:box
+       (:type :io)
+       (:reference
+        (:out (:type omout) (:name "output 1") (:index 1) (:doc "")))
+       (:group-id nil)
+       (:name "output 1")
+       (:x 323)
+       (:y 377)
+       (:w 68)
+       (:h 42)
+       (:color
+        (:color-or-nil
+         (:color (:color 1.0 1.0 1.0 0.0))
+         (:t-or-nil t)))
+       (:border 0)
+       (:roundness 0)
+       (:text-font nil)
+       (:align :center)
+       (:icon :top)
+       (:inputs
+        (:input
+         (:type :standard)
+         (:name "out-value")
+         (:value nil)
+         (:reactive nil)))
+       (:outputs)
+       (:id 0))
+      (:box
        (:type :function)
        (:reference list)
        (:group-id nil)
@@ -1623,8 +1652,9 @@ But the clouds at the input are homogeneous :
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 0))
+       (:id 1))
       (:box
+       (:library "Morphologie")
        (:type :function)
        (:reference (:symbol "E-SHANNON" "MORPH"))
        (:group-id nil)
@@ -1652,7 +1682,7 @@ But the clouds at the input are homogeneous :
          (:value "rel")
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 1))
+       (:id 2))
       (:box
        (:type :special)
        (:reference collect)
@@ -1691,7 +1721,7 @@ But the clouds at the input are homogeneous :
         (:output (:name "collect") (:reactive nil))
         (:output (:name "data-out") (:reactive nil))
         (:output (:name "init") (:reactive nil)))
-       (:id 2))
+       (:id 3))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -1713,7 +1743,7 @@ But the clouds at the input are homogeneous :
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 1)
-       (:id 3))
+       (:id 4))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -1735,7 +1765,7 @@ But the clouds at the input are homogeneous :
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 8)
-       (:id 4))
+       (:id 5))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -1757,7 +1787,7 @@ But the clouds at the input are homogeneous :
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 2)
-       (:id 5))
+       (:id 6))
       (:box
        (:type :function)
        (:reference arithm-ser)
@@ -1791,8 +1821,9 @@ But the clouds at the input are homogeneous :
          (:value 1)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 6))
+       (:id 7))
       (:box
+       (:library "Morphologie")
        (:type :function)
        (:reference (:symbol "CLASS-1" "MORPH"))
        (:group-id nil)
@@ -1820,8 +1851,9 @@ But the clouds at the input are homogeneous :
          (:value 2)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 7))
+       (:id 8))
       (:box
+       (:library "Morphologie")
        (:type :function)
        (:reference (:symbol "L-MATRIX" "MORPH"))
        (:group-id nil)
@@ -1844,7 +1876,7 @@ But the clouds at the input are homogeneous :
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 8))
+       (:id 9))
       (:box
        (:type :special)
        (:reference iterate)
@@ -1870,7 +1902,7 @@ But the clouds at the input are homogeneous :
          (:value nil)
          (:reactive nil)))
        (:outputs)
-       (:id 9))
+       (:id 10))
       (:box
        (:type :special)
        (:reference loop-list)
@@ -1896,33 +1928,6 @@ But the clouds at the input are homogeneous :
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "i") (:reactive nil)))
-       (:id 10))
-      (:box
-       (:type :io)
-       (:reference
-        (:out (:type omout) (:name "output 1") (:index 1) (:doc "")))
-       (:group-id nil)
-       (:name "output 1")
-       (:x 323)
-       (:y 377)
-       (:w 68)
-       (:h 42)
-       (:color
-        (:color-or-nil
-         (:color (:color 1.0 1.0 1.0 0.0))
-         (:t-or-nil t)))
-       (:border 0)
-       (:roundness 0)
-       (:text-font nil)
-       (:align :center)
-       (:icon :top)
-       (:inputs
-        (:input
-         (:type :standard)
-         (:name "out-value")
-         (:value nil)
-         (:reactive nil)))
-       (:outputs)
        (:id 11))
       (:box
        (:type :value)
@@ -1959,6 +1964,115 @@ But the clouds at the input are homogeneous :
          (:lock nil)
          (:boxes
           (:box
+           (:type :io)
+           (:reference
+            (:in
+             (:type omin)
+             (:index 1)
+             (:name "input")
+             (:doc "n cloud 1")))
+           (:group-id nil)
+           (:name "input")
+           (:x 186)
+           (:y 46)
+           (:w 50)
+           (:h 42)
+           (:color
+            (:color-or-nil
+             (:color (:color 1.0 1.0 1.0 0.0))
+             (:t-or-nil t)))
+           (:border 0)
+           (:roundness 0)
+           (:text-font nil)
+           (:align :center)
+           (:icon :top)
+           (:inputs)
+           (:outputs (:output (:name "out") (:reactive nil)))
+           (:id 0))
+          (:box
+           (:type :io)
+           (:reference
+            (:out
+             (:type omout)
+             (:name "output")
+             (:index 1)
+             (:doc nil)))
+           (:group-id nil)
+           (:name "output")
+           (:x 290)
+           (:y 409)
+           (:w 58)
+           (:h 42)
+           (:color
+            (:color-or-nil
+             (:color (:color 1.0 1.0 1.0 0.0))
+             (:t-or-nil t)))
+           (:border 0)
+           (:roundness 0)
+           (:text-font nil)
+           (:align :center)
+           (:icon :top)
+           (:inputs
+            (:input
+             (:type :standard)
+             (:name "out-value")
+             (:value nil)
+             (:reactive nil)))
+           (:outputs)
+           (:id 1))
+          (:box
+           (:type :io)
+           (:reference
+            (:in
+             (:type omin)
+             (:index 2)
+             (:name "input1")
+             (:doc "n cloud 2")))
+           (:group-id nil)
+           (:name "input1")
+           (:x 376)
+           (:y 50)
+           (:w 56)
+           (:h 42)
+           (:color
+            (:color-or-nil
+             (:color (:color 1.0 1.0 1.0 0.0))
+             (:t-or-nil t)))
+           (:border 0)
+           (:roundness 0)
+           (:text-font nil)
+           (:align :center)
+           (:icon :top)
+           (:inputs)
+           (:outputs (:output (:name "out") (:reactive nil)))
+           (:id 2))
+          (:box
+           (:type :io)
+           (:reference
+            (:in
+             (:type omin)
+             (:index 3)
+             (:name "input2")
+             (:doc "n cloud 3")))
+           (:group-id nil)
+           (:name "input2")
+           (:x 545)
+           (:y 47)
+           (:w 56)
+           (:h 42)
+           (:color
+            (:color-or-nil
+             (:color (:color 1.0 1.0 1.0 0.0))
+             (:t-or-nil t)))
+           (:border 0)
+           (:roundness 0)
+           (:text-font nil)
+           (:align :center)
+           (:icon :top)
+           (:inputs)
+           (:outputs (:output (:name "out") (:reactive nil)))
+           (:id 3))
+          (:box
            (:type :function)
            (:reference list)
            (:group-id nil)
@@ -1986,7 +2100,7 @@ But the clouds at the input are homogeneous :
              (:value nil)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 0))
+           (:id 4))
           (:box
            (:type :function)
            (:reference x-append)
@@ -2020,7 +2134,7 @@ But the clouds at the input are homogeneous :
              (:value nil)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 1))
+           (:id 5))
           (:box
            (:type :function)
            (:reference x-append)
@@ -2054,7 +2168,7 @@ But the clouds at the input are homogeneous :
              (:value nil)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 2))
+           (:id 6))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2087,7 +2201,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 3))
+           (:id 7))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2120,7 +2234,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 4))
+           (:id 8))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2153,7 +2267,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 5))
+           (:id 9))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2186,7 +2300,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 6))
+           (:id 10))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2208,7 +2322,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 200)
-           (:id 7))
+           (:id 11))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2230,7 +2344,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 180)
-           (:id 8))
+           (:id 12))
           (:box
            (:type :function)
            (:reference om-random)
@@ -2259,7 +2373,7 @@ But the clouds at the input are homogeneous :
              (:value 5)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 9))
+           (:id 13))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2281,7 +2395,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 140)
-           (:id 10))
+           (:id 14))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2303,7 +2417,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 110)
-           (:id 11))
+           (:id 15))
           (:box
            (:type :function)
            (:reference om-random)
@@ -2332,7 +2446,7 @@ But the clouds at the input are homogeneous :
              (:value 5)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 12))
+           (:id 16))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2354,7 +2468,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 100)
-           (:id 13))
+           (:id 17))
           (:box
            (:type :value)
            (:reference fixnum)
@@ -2376,7 +2490,7 @@ But the clouds at the input are homogeneous :
            (:inputs)
            (:outputs (:output (:name "value") (:reactive nil)))
            (:value 0)
-           (:id 14))
+           (:id 18))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2409,7 +2523,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 15))
+           (:id 19))
           (:box
            (:type :function)
            (:reference om-random)
@@ -2438,7 +2552,7 @@ But the clouds at the input are homogeneous :
              (:value 5)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 16))
+           (:id 20))
           (:box
            (:type :special)
            (:reference repeat-n)
@@ -2471,7 +2585,7 @@ But the clouds at the input are homogeneous :
              (:reactive nil)))
            (:outputs
             (:output (:name "collected results") (:reactive nil)))
-           (:id 17))
+           (:id 21))
           (:box
            (:type :function)
            (:reference mat-trans)
@@ -2495,200 +2609,95 @@ But the clouds at the input are homogeneous :
              (:value nil)
              (:reactive nil)))
            (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 18))
-          (:box
-           (:type :io)
-           (:reference
-            (:in
-             (:type omin)
-             (:index 1)
-             (:name "input")
-             (:doc "n cloud 1")))
-           (:group-id nil)
-           (:name "input")
-           (:x 186)
-           (:y 46)
-           (:w 50)
-           (:h 42)
-           (:color
-            (:color-or-nil
-             (:color (:color 1.0 1.0 1.0 0.0))
-             (:t-or-nil t)))
-           (:border 0)
-           (:roundness 0)
-           (:text-font nil)
-           (:align :center)
-           (:icon :top)
-           (:inputs)
-           (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 19))
-          (:box
-           (:type :io)
-           (:reference
-            (:out
-             (:type omout)
-             (:name "output")
-             (:index 1)
-             (:doc nil)))
-           (:group-id nil)
-           (:name "output")
-           (:x 290)
-           (:y 409)
-           (:w 58)
-           (:h 42)
-           (:color
-            (:color-or-nil
-             (:color (:color 1.0 1.0 1.0 0.0))
-             (:t-or-nil t)))
-           (:border 0)
-           (:roundness 0)
-           (:text-font nil)
-           (:align :center)
-           (:icon :top)
-           (:inputs
-            (:input
-             (:type :standard)
-             (:name "out-value")
-             (:value nil)
-             (:reactive nil)))
-           (:outputs)
-           (:id 20))
-          (:box
-           (:type :io)
-           (:reference
-            (:in
-             (:type omin)
-             (:index 2)
-             (:name "input1")
-             (:doc "n cloud 2")))
-           (:group-id nil)
-           (:name "input1")
-           (:x 376)
-           (:y 50)
-           (:w 56)
-           (:h 42)
-           (:color
-            (:color-or-nil
-             (:color (:color 1.0 1.0 1.0 0.0))
-             (:t-or-nil t)))
-           (:border 0)
-           (:roundness 0)
-           (:text-font nil)
-           (:align :center)
-           (:icon :top)
-           (:inputs)
-           (:outputs (:output (:name "out") (:reactive nil)))
-           (:id 21))
-          (:box
-           (:type :io)
-           (:reference
-            (:in
-             (:type omin)
-             (:index 3)
-             (:name "input2")
-             (:doc "n cloud 3")))
-           (:group-id nil)
-           (:name "input2")
-           (:x 545)
-           (:y 47)
-           (:w 56)
-           (:h 42)
-           (:color
-            (:color-or-nil
-             (:color (:color 1.0 1.0 1.0 0.0))
-             (:t-or-nil t)))
-           (:border 0)
-           (:roundness 0)
-           (:text-font nil)
-           (:align :center)
-           (:icon :top)
-           (:inputs)
-           (:outputs (:output (:name "out") (:reactive nil)))
            (:id 22)))
          (:connections
           (:connection
            (:from (:box 0 :out 0))
-           (:to (:box 18 :in 0))
+           (:to (:box 19 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
-           (:from (:box 1 :out 0))
-           (:to (:box 0 :in 1))
+           (:from (:box 0 :out 0))
+           (:to (:box 21 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 2 :out 0))
-           (:to (:box 0 :in 0))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 3 :out 0))
-           (:to (:box 2 :in 2))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 4 :out 0))
-           (:to (:box 1 :in 2))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 5 :out 0))
-           (:to (:box 2 :in 1))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 6 :out 0))
-           (:to (:box 1 :in 1))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 7 :out 0))
            (:to (:box 9 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
-           (:from (:box 8 :out 0))
-           (:to (:box 9 :in 0))
+           (:from (:box 2 :out 0))
+           (:to (:box 10 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
-           (:from (:box 9 :out 0))
-           (:to (:box 3 :in 0))
+           (:from (:box 3 :out 0))
+           (:to (:box 7 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
-           (:from (:box 9 :out 0))
+           (:from (:box 3 :out 0))
+           (:to (:box 8 :in 1))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 4 :out 0))
+           (:to (:box 22 :in 0))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 5 :out 0))
+           (:to (:box 4 :in 1))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 6 :out 0))
            (:to (:box 4 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
+           (:from (:box 7 :out 0))
+           (:to (:box 6 :in 2))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 8 :out 0))
+           (:to (:box 5 :in 2))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 9 :out 0))
+           (:to (:box 6 :in 1))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
            (:from (:box 10 :out 0))
-           (:to (:box 12 :in 1))
+           (:to (:box 5 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 11 :out 0))
-           (:to (:box 12 :in 0))
+           (:to (:box 13 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 12 :out 0))
-           (:to (:box 5 :in 0))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 12 :out 0))
-           (:to (:box 6 :in 0))
+           (:to (:box 13 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 13 :out 0))
-           (:to (:box 16 :in 1))
+           (:to (:box 7 :in 0))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 13 :out 0))
+           (:to (:box 8 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 14 :out 0))
-           (:to (:box 16 :in 0))
+           (:to (:box 16 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 15 :out 0))
-           (:to (:box 2 :in 0))
+           (:to (:box 16 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 16 :out 0))
-           (:to (:box 15 :in 0))
+           (:to (:box 9 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 16 :out 0))
-           (:to (:box 17 :in 0))
+           (:to (:box 10 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 17 :out 0))
-           (:to (:box 1 :in 0))
+           (:to (:box 20 :in 1))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 18 :out 0))
@@ -2696,27 +2705,23 @@ But the clouds at the input are homogeneous :
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 19 :out 0))
-           (:to (:box 15 :in 1))
+           (:to (:box 6 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
-           (:from (:box 19 :out 0))
-           (:to (:box 17 :in 1))
+           (:from (:box 20 :out 0))
+           (:to (:box 19 :in 0))
+           (:attributes (:color nil :style nil :modif nil)))
+          (:connection
+           (:from (:box 20 :out 0))
+           (:to (:box 21 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 21 :out 0))
-           (:to (:box 5 :in 1))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 21 :out 0))
-           (:to (:box 6 :in 1))
+           (:to (:box 5 :in 0))
            (:attributes (:color nil :style nil :modif nil)))
           (:connection
            (:from (:box 22 :out 0))
-           (:to (:box 3 :in 1))
-           (:attributes (:color nil :style nil :modif nil)))
-          (:connection
-           (:from (:box 22 :out 0))
-           (:to (:box 4 :in 1))
+           (:to (:box 1 :in 0))
            (:attributes (:color nil :style nil :modif nil))))))
        (:group-id nil)
        (:name "3 clouds")
@@ -2798,52 +2803,52 @@ But the clouds at the input are homogeneous :
        (:id 15)))
      (:connections
       (:connection
-       (:from (:box 0 :out 0))
-       (:to (:box 2 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
        (:from (:box 1 :out 0))
-       (:to (:box 0 :in 1))
+       (:to (:box 3 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 2 :out 0))
-       (:to (:box 9 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 2 :out 1))
-       (:to (:box 11 :in 0))
+       (:to (:box 1 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 3 :out 0))
-       (:to (:box 6 :in 2))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 4 :out 0))
-       (:to (:box 6 :in 1))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 5 :out 0))
-       (:to (:box 6 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 6 :out 0))
        (:to (:box 10 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 7 :out 0))
-       (:to (:box 1 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 8 :out 0))
-       (:to (:box 7 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 10 :out 0))
+       (:from (:box 3 :out 1))
        (:to (:box 0 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 10 :out 0))
+       (:from (:box 4 :out 0))
+       (:to (:box 7 :in 2))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 5 :out 0))
        (:to (:box 7 :in 1))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 6 :out 0))
+       (:to (:box 7 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 7 :out 0))
+       (:to (:box 11 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 8 :out 0))
+       (:to (:box 2 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 9 :out 0))
+       (:to (:box 8 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 11 :out 0))
+       (:to (:box 1 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 11 :out 0))
+       (:to (:box 8 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 12 :out 0))
@@ -2851,7 +2856,7 @@ But the clouds at the input are homogeneous :
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 13 :out 0))
-       (:to (:box 8 :in 0))
+       (:to (:box 9 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 14 :out 0))
@@ -2926,6 +2931,7 @@ has a MAXIMUM entropy.")
    (:text "<- works also with a string as input")
    (:id 20))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -2968,6 +2974,7 @@ has a MAXIMUM entropy.")
    (:text "defines 5 classes")
    (:id 22))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "CLASS-1" "MORPH"))
    (:group-id nil)
@@ -3018,6 +3025,7 @@ has a MAXIMUM entropy.")
    (:value 5)
    (:id 24))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -3047,6 +3055,7 @@ has a MAXIMUM entropy.")
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 25))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -3076,6 +3085,7 @@ has a MAXIMUM entropy.")
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 26))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -3118,6 +3128,7 @@ has a MAXIMUM entropy.")
    (:text "defines 4 classes")
    (:id 28))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "CLASS-1" "MORPH"))
    (:group-id nil)
@@ -3176,6 +3187,7 @@ has a MAXIMUM entropy.")
    (:text "defines 3 classes")
    (:id 31))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "CLASS-1" "MORPH"))
    (:group-id nil)
@@ -3234,6 +3246,7 @@ has a MAXIMUM entropy.")
    (:text "defines 2 classes")
    (:id 34))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "CLASS-1" "MORPH"))
    (:group-id nil)
@@ -3292,6 +3305,7 @@ has a MAXIMUM entropy.")
    (:text "defines 1 classe")
    (:id 37))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "E-SHANNON" "MORPH"))
    (:group-id nil)
@@ -3321,6 +3335,7 @@ has a MAXIMUM entropy.")
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 38))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "CLASS-1" "MORPH"))
    (:group-id nil)
@@ -3346,6 +3361,7 @@ has a MAXIMUM entropy.")
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 39))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "L-MATRIX" "MORPH"))
    (:group-id nil)
@@ -3415,6 +3431,111 @@ has a MAXIMUM entropy.")
      (:lock nil)
      (:boxes
       (:box
+       (:type :io)
+       (:reference
+        (:in
+         (:type omin)
+         (:index 1)
+         (:name "input")
+         (:doc "n cloud 1")))
+       (:group-id nil)
+       (:name "input")
+       (:x 186)
+       (:y 46)
+       (:w 50)
+       (:h 42)
+       (:color
+        (:color-or-nil
+         (:color (:color 1.0 1.0 1.0 0.0))
+         (:t-or-nil t)))
+       (:border 0)
+       (:roundness 0)
+       (:text-font nil)
+       (:align :center)
+       (:icon :top)
+       (:inputs)
+       (:outputs (:output (:name "out") (:reactive nil)))
+       (:id 0))
+      (:box
+       (:type :io)
+       (:reference
+        (:out (:type omout) (:name "output") (:index 1) (:doc nil)))
+       (:group-id nil)
+       (:name "output")
+       (:x 290)
+       (:y 409)
+       (:w 58)
+       (:h 42)
+       (:color
+        (:color-or-nil
+         (:color (:color 1.0 1.0 1.0 0.0))
+         (:t-or-nil t)))
+       (:border 0)
+       (:roundness 0)
+       (:text-font nil)
+       (:align :center)
+       (:icon :top)
+       (:inputs
+        (:input
+         (:type :standard)
+         (:name "out-value")
+         (:value nil)
+         (:reactive nil)))
+       (:outputs)
+       (:id 1))
+      (:box
+       (:type :io)
+       (:reference
+        (:in
+         (:type omin)
+         (:index 2)
+         (:name "input1")
+         (:doc "n cloud 2")))
+       (:group-id nil)
+       (:name "input1")
+       (:x 376)
+       (:y 50)
+       (:w 56)
+       (:h 42)
+       (:color
+        (:color-or-nil
+         (:color (:color 1.0 1.0 1.0 0.0))
+         (:t-or-nil t)))
+       (:border 0)
+       (:roundness 0)
+       (:text-font nil)
+       (:align :center)
+       (:icon :top)
+       (:inputs)
+       (:outputs (:output (:name "out") (:reactive nil)))
+       (:id 2))
+      (:box
+       (:type :io)
+       (:reference
+        (:in
+         (:type omin)
+         (:index 3)
+         (:name "input2")
+         (:doc "n cloud 3")))
+       (:group-id nil)
+       (:name "input2")
+       (:x 545)
+       (:y 47)
+       (:w 56)
+       (:h 42)
+       (:color
+        (:color-or-nil
+         (:color (:color 1.0 1.0 1.0 0.0))
+         (:t-or-nil t)))
+       (:border 0)
+       (:roundness 0)
+       (:text-font nil)
+       (:align :center)
+       (:icon :top)
+       (:inputs)
+       (:outputs (:output (:name "out") (:reactive nil)))
+       (:id 3))
+      (:box
        (:type :function)
        (:reference list)
        (:group-id nil)
@@ -3442,7 +3563,7 @@ has a MAXIMUM entropy.")
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 0))
+       (:id 4))
       (:box
        (:type :function)
        (:reference x-append)
@@ -3476,7 +3597,7 @@ has a MAXIMUM entropy.")
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 1))
+       (:id 5))
       (:box
        (:type :function)
        (:reference x-append)
@@ -3510,7 +3631,7 @@ has a MAXIMUM entropy.")
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 2))
+       (:id 6))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3542,7 +3663,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 3))
+       (:id 7))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3574,7 +3695,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 4))
+       (:id 8))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3606,7 +3727,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 5))
+       (:id 9))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3638,7 +3759,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 6))
+       (:id 10))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3660,7 +3781,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 200)
-       (:id 7))
+       (:id 11))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3682,7 +3803,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 180)
-       (:id 8))
+       (:id 12))
       (:box
        (:type :function)
        (:reference om-random)
@@ -3711,7 +3832,7 @@ has a MAXIMUM entropy.")
          (:value 5)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 9))
+       (:id 13))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3733,7 +3854,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 140)
-       (:id 10))
+       (:id 14))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3755,7 +3876,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 110)
-       (:id 11))
+       (:id 15))
       (:box
        (:type :function)
        (:reference om-random)
@@ -3784,7 +3905,7 @@ has a MAXIMUM entropy.")
          (:value 5)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 12))
+       (:id 16))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3806,7 +3927,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 100)
-       (:id 13))
+       (:id 17))
       (:box
        (:type :value)
        (:reference fixnum)
@@ -3828,7 +3949,7 @@ has a MAXIMUM entropy.")
        (:inputs)
        (:outputs (:output (:name "value") (:reactive nil)))
        (:value 0)
-       (:id 14))
+       (:id 18))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3860,7 +3981,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 15))
+       (:id 19))
       (:box
        (:type :function)
        (:reference om-random)
@@ -3889,7 +4010,7 @@ has a MAXIMUM entropy.")
          (:value 5)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 16))
+       (:id 20))
       (:box
        (:type :special)
        (:reference repeat-n)
@@ -3921,7 +4042,7 @@ has a MAXIMUM entropy.")
          (:value 100)
          (:reactive nil)))
        (:outputs (:output (:name "collected results") (:reactive nil)))
-       (:id 17))
+       (:id 21))
       (:box
        (:type :function)
        (:reference mat-trans)
@@ -3945,196 +4066,95 @@ has a MAXIMUM entropy.")
          (:value nil)
          (:reactive nil)))
        (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 18))
-      (:box
-       (:type :io)
-       (:reference
-        (:in
-         (:type omin)
-         (:index 1)
-         (:name "input")
-         (:doc "n cloud 1")))
-       (:group-id nil)
-       (:name "input")
-       (:x 186)
-       (:y 46)
-       (:w 50)
-       (:h 42)
-       (:color
-        (:color-or-nil
-         (:color (:color 1.0 1.0 1.0 0.0))
-         (:t-or-nil t)))
-       (:border 0)
-       (:roundness 0)
-       (:text-font nil)
-       (:align :center)
-       (:icon :top)
-       (:inputs)
-       (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 19))
-      (:box
-       (:type :io)
-       (:reference
-        (:out (:type omout) (:name "output") (:index 1) (:doc nil)))
-       (:group-id nil)
-       (:name "output")
-       (:x 290)
-       (:y 409)
-       (:w 58)
-       (:h 42)
-       (:color
-        (:color-or-nil
-         (:color (:color 1.0 1.0 1.0 0.0))
-         (:t-or-nil t)))
-       (:border 0)
-       (:roundness 0)
-       (:text-font nil)
-       (:align :center)
-       (:icon :top)
-       (:inputs
-        (:input
-         (:type :standard)
-         (:name "out-value")
-         (:value nil)
-         (:reactive nil)))
-       (:outputs)
-       (:id 20))
-      (:box
-       (:type :io)
-       (:reference
-        (:in
-         (:type omin)
-         (:index 2)
-         (:name "input1")
-         (:doc "n cloud 2")))
-       (:group-id nil)
-       (:name "input1")
-       (:x 376)
-       (:y 50)
-       (:w 56)
-       (:h 42)
-       (:color
-        (:color-or-nil
-         (:color (:color 1.0 1.0 1.0 0.0))
-         (:t-or-nil t)))
-       (:border 0)
-       (:roundness 0)
-       (:text-font nil)
-       (:align :center)
-       (:icon :top)
-       (:inputs)
-       (:outputs (:output (:name "out") (:reactive nil)))
-       (:id 21))
-      (:box
-       (:type :io)
-       (:reference
-        (:in
-         (:type omin)
-         (:index 3)
-         (:name "input2")
-         (:doc "n cloud 3")))
-       (:group-id nil)
-       (:name "input2")
-       (:x 545)
-       (:y 47)
-       (:w 56)
-       (:h 42)
-       (:color
-        (:color-or-nil
-         (:color (:color 1.0 1.0 1.0 0.0))
-         (:t-or-nil t)))
-       (:border 0)
-       (:roundness 0)
-       (:text-font nil)
-       (:align :center)
-       (:icon :top)
-       (:inputs)
-       (:outputs (:output (:name "out") (:reactive nil)))
        (:id 22)))
      (:connections
       (:connection
        (:from (:box 0 :out 0))
-       (:to (:box 18 :in 0))
+       (:to (:box 19 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 1 :out 0))
-       (:to (:box 0 :in 1))
+       (:from (:box 0 :out 0))
+       (:to (:box 21 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 2 :out 0))
-       (:to (:box 0 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 3 :out 0))
-       (:to (:box 2 :in 2))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 4 :out 0))
-       (:to (:box 1 :in 2))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 5 :out 0))
-       (:to (:box 2 :in 1))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 6 :out 0))
-       (:to (:box 1 :in 1))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 7 :out 0))
        (:to (:box 9 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 8 :out 0))
-       (:to (:box 9 :in 0))
+       (:from (:box 2 :out 0))
+       (:to (:box 10 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 9 :out 0))
-       (:to (:box 3 :in 0))
+       (:from (:box 3 :out 0))
+       (:to (:box 7 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 9 :out 0))
+       (:from (:box 3 :out 0))
+       (:to (:box 8 :in 1))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 4 :out 0))
+       (:to (:box 22 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 5 :out 0))
+       (:to (:box 4 :in 1))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 6 :out 0))
        (:to (:box 4 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
+       (:from (:box 7 :out 0))
+       (:to (:box 6 :in 2))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 8 :out 0))
+       (:to (:box 5 :in 2))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 9 :out 0))
+       (:to (:box 6 :in 1))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
        (:from (:box 10 :out 0))
-       (:to (:box 12 :in 1))
+       (:to (:box 5 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 11 :out 0))
-       (:to (:box 12 :in 0))
+       (:to (:box 13 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 12 :out 0))
-       (:to (:box 5 :in 0))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 12 :out 0))
-       (:to (:box 6 :in 0))
+       (:to (:box 13 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 13 :out 0))
-       (:to (:box 16 :in 1))
+       (:to (:box 7 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 13 :out 0))
+       (:to (:box 8 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 14 :out 0))
-       (:to (:box 16 :in 0))
+       (:to (:box 16 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 15 :out 0))
-       (:to (:box 2 :in 0))
+       (:to (:box 16 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 16 :out 0))
-       (:to (:box 15 :in 0))
+       (:to (:box 9 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 16 :out 0))
-       (:to (:box 17 :in 0))
+       (:to (:box 10 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 17 :out 0))
-       (:to (:box 1 :in 0))
+       (:to (:box 20 :in 1))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 18 :out 0))
@@ -4142,27 +4162,23 @@ has a MAXIMUM entropy.")
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 19 :out 0))
-       (:to (:box 15 :in 1))
+       (:to (:box 6 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
-       (:from (:box 19 :out 0))
-       (:to (:box 17 :in 1))
+       (:from (:box 20 :out 0))
+       (:to (:box 19 :in 0))
+       (:attributes (:color nil :style nil :modif nil)))
+      (:connection
+       (:from (:box 20 :out 0))
+       (:to (:box 21 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 21 :out 0))
-       (:to (:box 5 :in 1))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 21 :out 0))
-       (:to (:box 6 :in 1))
+       (:to (:box 5 :in 0))
        (:attributes (:color nil :style nil :modif nil)))
       (:connection
        (:from (:box 22 :out 0))
-       (:to (:box 3 :in 1))
-       (:attributes (:color nil :style nil :modif nil)))
-      (:connection
-       (:from (:box 22 :out 0))
-       (:to (:box 4 :in 1))
+       (:to (:box 1 :in 0))
        (:attributes (:color nil :style nil :modif nil))))))
    (:group-id nil)
    (:name "3 clouds")
@@ -4237,31 +4253,7 @@ has a MAXIMUM entropy.")
    (:inputs)
    (:outputs (:output (:name "value") (:reactive nil)))
    (:value 100)
-   (:id 45))
-  (:comment
-   (:x 670)
-   (:y 22)
-   (:w 212)
-   (:h 25)
-   (:fgcolor
-    (:color-or-nil
-     (:color
-      (:color
-       0.6270285248756409D0
-       0.16350972652435303D0
-       0.15764805674552918D0
-       1.0D0))
-     (:t-or-nil t)))
-   (:bgcolor nil)
-   (:border 0)
-   (:roundness nil)
-   (:text-font
-    (:font-or-nil
-     (:font (:font (:face "Calibri") (:size 14.0D0) (:style :bold)))
-     (:t-or-nil t)))
-   (:align nil)
-   (:text "THESE EXAMPLES DO NOT WORK !")
-   (:id 46)))
+   (:id 45)))
  (:connections
   (:connection
    (:from (:box 7 :out 0))
