@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:51:37")
-  (:modified "2019/09/24 1:18:10"))
+  (:modified "2019/09/25 14:06:22"))
  (:window (:size (591 490)) (:position (526 552)))
  (:grid nil)
  (:lock nil)
@@ -14,7 +14,7 @@
    (:x 269)
    (:y 356)
    (:w 247)
-   (:h 61)
+   (:h 41)
    (:fgcolor (:color 0 0 0 1.0))
    (:bgcolor nil)
    (:border 0)
@@ -28,7 +28,7 @@
    (:x 269)
    (:y 289)
    (:w 211)
-   (:h 60)
+   (:h 43)
    (:fgcolor (:color 0 0 0 1.0))
    (:bgcolor nil)
    (:border 0)
@@ -79,6 +79,7 @@
    (:text "1) Here is a list of symbol sequences")
    (:id 4))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "PRIM-TREE" "MORPH"))
    (:group-id nil)
@@ -103,6 +104,7 @@
    (:outputs (:output (:name "out") (:reactive nil)))
    (:id 5))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "DRAW-TREE" "MORPH"))
    (:group-id nil)
@@ -166,6 +168,7 @@
      (:list t h i)))
    (:id 7))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "LDL-DISTANCE" "MORPH"))
    (:group-id nil)

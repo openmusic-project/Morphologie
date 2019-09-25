@@ -5,13 +5,13 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:51:37")
-  (:modified "2019/09/24 0:54:02"))
+  (:modified "2019/09/25 14:06:13"))
  (:window (:size (871 283)) (:position (505 529)))
  (:grid nil)
  (:lock nil)
  (:boxes
   (:comment
-   (:x 418)
+   (:x 419)
    (:y 145)
    (:w 284)
    (:h 55)
@@ -112,6 +112,7 @@
    (:value (:list (:list a 1.0 e 8) (:list a 2.0 e 8)))
    (:id 5))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "MULTI-DISTANCE" "MORPH"))
    (:group-id nil)

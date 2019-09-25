@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:34:19")
-  (:modified "2019/09/24 0:37:06"))
+  (:modified "2019/09/25 14:05:53"))
  (:window (:size (500 400)) (:position (211 207)))
  (:grid nil)
  (:lock nil)
@@ -51,6 +51,7 @@
    (:value (:list (:list 1 2 3 4) (:list 1 2)))
    (:id 1))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "INS-PTRN" "MORPH"))
    (:group-id nil)
@@ -187,7 +188,7 @@
    (:group-id nil)
    (:name "nth-random")
    (:x 74)
-   (:y 85)
+   (:y 95)
    (:w 97)
    (:h 30)
    (:color nil)

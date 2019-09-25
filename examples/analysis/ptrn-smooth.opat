@@ -5,12 +5,13 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:34:21")
-  (:modified "2019/09/24 0:35:03"))
- (:window (:size (477 368)) (:position (436 380)))
+  (:modified "2019/09/25 14:05:25"))
+ (:window (:size (477 368)) (:position (458 383)))
  (:grid nil)
  (:lock nil)
  (:boxes
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "PTRN-SMOOTH" "MORPH"))
    (:group-id nil)
@@ -70,7 +71,7 @@
    (:text "removes the local repetitions")
    (:id 1))
   (:comment
-   (:x 213)
+   (:x 218)
    (:y 47)
    (:w 116)
    (:h 38)
