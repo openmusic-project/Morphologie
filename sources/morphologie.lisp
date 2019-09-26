@@ -117,7 +117,7 @@
                           (nthcdr y lista1)
                           x)
                          ris))))
-          (t (format t " Invalid optional input") (abort)))
+          (t (format om-lisp::*om-stream* " Invalid optional input") (abort)))
     (reverse ris)))
 
 
@@ -329,7 +329,7 @@ OUTPUT
 A matrix of distances"
   (when (not (= (length l-seq) (length (remove-duplicates (copy-list l-seq) :test #'equal))))
     (setf l-seq (remove-duplicates l-seq :test #'equal))
-    (format t "Warning: removing duplicates in input.~%"))
+    (format om-lisp::*om-stream* "Warning: removing duplicates in input.~%"))
   (let ((r ()))
     (if (equalp scale "rel")
       (setf scale 1) (setf scale 2))
@@ -367,7 +367,7 @@ A matrix of distances"
 (defun see-ldist (d-seq?)
 "Prints in easy-to-read way the distances from dist-list function"
   (dolist (s d-seq?)
-    (format t "~%distance ~S / ~S  --> ~,3F ~%" (car s) (cadr s) (caddr s))))
+    (format om-lisp::*om-stream* "~%distance ~S / ~S  --> ~,3F ~%" (car s) (cadr s) (caddr s))))
 
 (defun save-ldist (d-seq?)
 "Writes a file with all distances computed by dist-list function"
@@ -375,10 +375,10 @@ A matrix of distances"
   (with-open-file (out-stream out-file :direction :output
                               :if-exists :supersede
                               :if-does-not-exist :create)
-    (format t "~&---> Writing distances in : ~S ..." out-file)
+    (format om-lisp::*om-stream* "~&---> Writing distances in : ~S ..." out-file)
     (dolist (s d-seq?)
       (format out-stream "~S~T~S~T~,5F~%" (car s) (cadr s) (caddr s)))
-    (format t "~%---> DONE !"))))
+    (format om-lisp::*om-stream* "~%---> DONE !"))))
 
 ;
 ;******************  contrastive analysis ***************************
@@ -697,16 +697,16 @@ A matrix of distances"
            (view-str-1 seq res seg alpha? 't date run-time))
           ((eq result 2)
            (when out-file 
-             (format t "Writing marker analysis in file : ~S...~%" out-file)
+             (format om-lisp::*om-stream* "Writing marker analysis in file : ~S...~%" out-file)
              (with-open-file (out-st out-file                          
                                      :direction :output
                                      :if-exists :supersede
                                      :if-does-not-exist :create)
                (view-str-1 seq res seg alpha? out-st date run-time))
            ;(set-mac-file-creator out-file 'ttxt)
-             (format t "DONE~%")))
+             (format om-lisp::*om-stream* "DONE~%")))
           ((eq result 0)
-           (format t "~%   Marker analysis (computation time = ~S s.) :~%" run-time)
+           (format om-lisp::*om-stream* "~%   Marker analysis (computation time = ~S s.) :~%" run-time)
            (if (eq alpha? 0)
              (list (car seg) (mapcar 'car (cadr seg)) (mapcar 'cadr (cadr seg)))
              (to-a-special (list (car seg) (mapcar 'car (cadr seg)) (last res)))))
@@ -760,7 +760,7 @@ A matrix of distances"
          (mapcar #'convert-to-alpha list-of-nb))
         
         (t
-         (format t
+         (format om-lisp::*om-stream*
                  "~%to-alpha : Error when converting integers to alpha :~%Accepts only, integers or list of int, or list of list of int.~%"))))))
 
 (defun to-alphanum (list-of-nb)
@@ -773,7 +773,7 @@ A matrix of distances"
         ((eq 'nil (member 'nil (mapcar 'listp list-of-nb)))
          (mapcar #'convert-to-alphanum list-of-nb))
         (t
-         (format t
+         (format om-lisp::*om-stream*
                  "~%to-alpha : Error when converting integers to alpha :~%Accepts only, integers or list of int, or list of list of int.~%")))))
 
 (defun convert-to-alphanum (list-of-numbers)
@@ -786,7 +786,7 @@ A matrix of distances"
   (dotimes (l (length (cadr list)) list)
     (dotimes (n (length (nth l (cadr list))))
       (when (not (numberp (car (nth n (nth l (cadr list))))))
-        (format t "~%Error when converting to alpha notation :~%pattern names are already symbols (in place of integers).~%~%")
+        (format om-lisp::*om-stream* "~%Error when converting to alpha notation :~%pattern names are already symbols (in place of integers).~%~%")
         (abort))
       (setf (car (nth n (nth l (cadr list))))
             (make-string 1 :initial-element (nth (1- (car (nth n (nth l (cadr list))))) **alpha**))))))
@@ -971,7 +971,7 @@ out-st is the output stream ('t or file)."
   :icon 128
   :doc "Recursive Mark Analysis. Returns only structures found."
   (when (< levels 1)
-    (format t "Recursion error : levels must be >= 1 !~%")
+    (format om-lisp::*om-stream* "Recursion error : levels must be >= 1 !~%")
     (abort))
   
   (cond ((= result 0)
@@ -994,35 +994,35 @@ out-st is the output stream ('t or file)."
            (list (mapcar #'(lambda (s) (alp?? alpha? s levels)) (cdr sequence)) analysis)))
         ((= result 2)
          (let ((time-start (get-internal-real-time)) (date (take-date)) (scores ()))
-           (format t "~%~%Run of RECURSIVE MARK ANALYSIS on ~A ~A ~A ~A  at ~S h ~S mn"
+           (format om-lisp::*om-stream* "~%~%Run of RECURSIVE MARK ANALYSIS on ~A ~A ~A ~A  at ~S h ~S mn"
                    (nth 0 date) (nth 1 date) (nth 2 date) (nth 3 date) (nth 4 date) (nth 5 date))
-           (format t "~%For sequence : ~%~%~A" seq)
-           (format t "~%~%~% ~D analysis (recursive) level~:P, " levels)
+           (format om-lisp::*om-stream* "~%For sequence : ~%~%~A" seq)
+           (format om-lisp::*om-stream* "~%~%~% ~D analysis (recursive) level~:P, " levels)
            (print-smoothing smoo1 smoo2 levels 't)
            (setf scores (rma-1-scores
                          (alpha-struct alpha?
                                        (Recursive-Mark-Analyse seq smoo1 levels smoo2 alpha? t))))
-           (format t "~%~%********** SCORES ********** ~%")
+           (format om-lisp::*om-stream* "~%~%********** SCORES ********** ~%")
            (dotimes (level (length scores))
-             (format t "~%Scores at RMA level ~S :~%" (1+ level))
+             (format om-lisp::*om-stream* "~%Scores at RMA level ~S :~%" (1+ level))
              (if (= 0 level)
                (dotimes (n (length (nth level scores)))
-                 (format t "for structure ~S.~S:~%" (1+ level) (1+ n))
+                 (format om-lisp::*om-stream* "for structure ~S.~S:~%" (1+ level) (1+ n))
                  (dolist (u (nth n (nth level scores)))
-                   (format t "~A = ~S~%" (car u) (cadr u))))
+                   (format om-lisp::*om-stream* "~A = ~S~%" (car u) (cadr u))))
                (dolist (u (nth level scores))
-                 (format t "~A = ~S~%" (car u) (cadr u)))))
-           (format t "~%~%Computation time = ~S seconds." (float
+                 (format om-lisp::*om-stream* "~A = ~S~%" (car u) (cadr u)))))
+           (format om-lisp::*om-stream* "~%~%Computation time = ~S seconds." (float
                                                            (/ (- (get-internal-real-time) time-start)
                                                               internal-time-units-per-second))))
-         (format t "~%********** End of Recursive Mark Analysis *************~%"))
+         (format om-lisp::*om-stream* "~%********** End of Recursive Mark Analysis *************~%"))
         ((= result 3)
          (let ((out-file (om::om-choose-new-file-dialog
                           :prompt "Recursive Mark Analysis text file"
                           :button-string "save as"))
                time-start scores
                (date (take-date)))
-           (format t "Writing marker analysis in file : ~S...~%" (pathname-name out-file))
+           (format om-lisp::*om-stream* "Writing marker analysis in file : ~S...~%" (pathname-name out-file))
            (with-open-file (out-stream out-file                          
                                        :direction :output
                                        :if-exists :supersede
@@ -1052,7 +1052,7 @@ out-st is the output stream ('t or file)."
              (format out-stream "~%********** End of Recursive Mark Analysis *************~%"))
            ;(set-mac-file-creator out-file 'ttxt)
            )
-         (format t "DONE~%"))))
+         (format om-lisp::*om-stream* "DONE~%"))))
 
 (defun alpha-struct (yn structs)
   (loop for n from 0
@@ -1088,7 +1088,7 @@ out-st is the output stream ('t or file)."
                        (mapcar #'(lambda (list) (mapcar #'list-char-score list)) (nreverse scores)))
              (push (mapcar #'(lambda (x) (compt-score x (nth l lstring))) (nth l patts)) scores))))
         (t
-         (format t "~% Error : scores-level-0 : bad form on structures for level 0.~%")
+         (format om-lisp::*om-stream* "~% Error : scores-level-0 : bad form on structures for level 0.~%")
          (abort))))
 
 
@@ -1106,7 +1106,7 @@ out-st is the output stream ('t or file)."
           (push (scores-level-0 (car structures)) scores)
           (dotimes (p (length (nth l types)) (push (sort s '> :key #'cadr) scores))
             (push (compt-score (nth p (nth l types)) (nth l structures)) s))))
-      (format t "~%Error : rma-1-scores : input must be list of lists.~%"))))
+      (format om-lisp::*om-stream* "~%Error : rma-1-scores : input must be list of lists.~%"))))
 
 ;****************
 
@@ -1197,7 +1197,7 @@ out-st is the output stream ('t or file)."
 |#
 
 (defun ptrn-mat-bit (ptrn-pos length)
-  (let ((m (make-array (list (length ptrn-pos) length))))
+  (let ((m (make-array (list (length ptrn-pos) length) :initial-element 0)))
     (dotimes (n (length ptrn-pos) m)
       (dotimes (o (length (cadr (nth n ptrn-pos))))
         (dotimes (p (length (car (nth n ptrn-pos))))
@@ -1377,14 +1377,14 @@ Optional-2:
         (r ())
         (set2 0))
     (cond ((listp set)
-           (format t "~% Set is a list. Using margin option with first value of set.~%")
+           (format om-lisp::*om-stream* "~% Set is a list. Using margin option with first value of set.~%")
            (if (not (integerp (car set)))
-             (and (format t " First element of set is not a value: ignoring margin~%")
+             (and (format om-lisp::*om-stream* " First element of set is not a value: ignoring margin~%")
                   (setf marg 0))
              (setf set2 (car set))))
           ((integerp set)
            (setf set2 set))
-          (t (format t "~% Margin option can't be applyed (set is not a value): using set without margin.~%")
+          (t (format om-lisp::*om-stream* "~% Margin option can't be applyed (set is not a value): using set without margin.~%")
              (setf marg 0)))
     (when (not (listp (car ptrn)))
       (setf ptrn (list ptrn)))
@@ -1452,8 +1452,7 @@ Optional-2:
 -->(((a b c d) (0 9)) ((a b) (0 4 9)))
 |#
 
-(om::defmethod! structure-2 ((seq list) (n-max integer) 
-                             alpha? result 
+(om::defmethod! structure-2 ((seq list) (n-max integer) alpha? result 
                              &optional (length nil) (seuil 10))
   :menuins '((2 (("alpha" 1)
                  ("num"  0)))
@@ -1476,14 +1475,12 @@ result = type of output of analysis
           save -> save all analysis into a file.
 &OPTIONAL
 length = value or list of minimum and maximum values for length of patterns.
-         If nil, lengths of patterns are set up to the half-lenght of the sequence;
+       If nil, max length of patterns are set up to the half-lenght of the sequence;
 seuil = minimum completion percentage of the structure taken in account;
-
 OUTPUT
 Returns an analysis of seq following the repetition criterium for segmentation.
-
-Note : if out-of memory, try successives computations with a smaller value
-of n-max (max number of patterns combined in each structure"
+Note : in cqse of out-of memory, try computations with a smaller value
+of n-max, the max number of patterns combined in each structure."
   (let ((list-patterns (remove-duplicates (pattern-ridond seq length) :test 'equal))
         (date (take-date))
         (time-start (get-internal-real-time))
@@ -1491,56 +1488,41 @@ of n-max (max number of patterns combined in each structure"
         pos-patterns
         mat-bin-patterns
         completion-patterns
-        formes
-        out-file
-        cnp)
-    (when (= result 4)
-      (setf out-file (om::om-choose-new-file-dialog
-                      :prompt "Structure-2 pattern analysis"
-                      )))
+        formes)
     (setf pos-patterns (pos-ptrn-l list-patterns seq))
-    (cond ((eq result 1)
-           pos-patterns)
-          (t
-           (setf mat-bin-patterns (ptrn-mat-bit pos-patterns (length seq)))
-           (cond ((eq result 2)
-                  (list list-patterns
-                        mat-bin-patterns))
-                 (t
-                  (setf cnp (cnp-l (array-dimension mat-bin-patterns 0) n-max))
-                  (setf completion-patterns (mat-ptrn mat-bin-patterns cnp))
-                  (setf cnp nil)
-                  (setf mat-bin-patterns nil)                    
-                  (setf formes (make-form (forma
-                                           (loop for i from 0 to (- (length completion-patterns) 1)
-                                                 collect (list
-                                                          (loop
-                                                            for j
-                                                            from 0 to (- (length (car (nth i completion-patterns))) 1)
-                                                            collect
-                                                            (car (nth (nth j (car (nth i completion-patterns))) pos-patterns)))
-                                                          (cadr (nth i completion-patterns))))
-                                           seq seuil)
-                                          alpha?))
-                  (setf run-time (float (/ (- (get-internal-real-time) time-start)
-                                           internal-time-units-per-second)))
-                  (cond ((eq result 3)
-                         formes)
-                        ((eq result 0)
-                         (to-stream seq list-patterns seuil formes completion-patterns 't date run-time))
-                        ((eq result 4)
-                         (when out-file
-                           (format t "Writing Structure-2 analysis in file : ~S...~%" out-file)
-                           (with-open-file (out-st out-file                          
-                                                   :direction :output
-                                                   :if-exists :supersede
-                                                   :if-does-not-exist :create)
-                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)) ) ))))))))
+    (if (= result 1)
+        (values pos-patterns)
+      (progn
+        (setf mat-bin-patterns (ptrn-mat-bit pos-patterns (length seq)))
+        (if (= result 2)
+            (values (list list-patterns mat-bin-patterns))
+          (progn
+            (setf completion-patterns (mat-ptrn mat-bin-patterns (cnp-l (array-dimension mat-bin-patterns 0) n-max)))
+            (setf mat-bin-patterns nil)
+            (setf formes (make-form (forma
+                                     (loop for i from 0 to (- (length completion-patterns) 1)
+                                           collect (list
+                                                    (loop for j from 0 to (- (length (car (nth i completion-patterns))) 1)
+                                                          collect
+                                                          (car (nth (nth j (car (nth i completion-patterns))) pos-patterns)))
+                                                    (cadr (nth i completion-patterns))))
+                                     seq seuil)
+                                    alpha?))
+            (setf run-time (float (/ (- (get-internal-real-time) time-start) internal-time-units-per-second)))
+            (cond ((= result 3)
+                   formes)
+                  ((= result 0)
+                   (to-stream seq list-patterns seuil formes completion-patterns om-lisp::*om-stream* date run-time))
+                  ((= result 4)
+                   (let ((out-file (om::om-choose-new-file-dialog :prompt "Save structure-2 pattern analysis to file")))
+                     (print (format nil "Writing Structure-2 analysis in file : ~S..." out-file))
+                     (with-open-file (out-st out-file                          
+                                             :direction :output
+                                             :if-exists :supersede
+                                             :if-does-not-exist :create)
+                       (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)))))))))))
 
-(om::defmethod! forma ((analys list) (seq list) (seuil number))
-  
-  :initvals '(nil nil 1)
-  :icon 128
+(defun forma (analys seq seuil)
   (let ((r ()))
     (dolist (l analys (reverse r))
       (when (>= (cadr l) seuil)
@@ -1571,20 +1553,21 @@ of n-max (max number of patterns combined in each structure"
              (push (to-alpha k) res))))))))
 
 (defun to-stream (seq list-of-pat seuil analysis compl stream date run-time)
-  (format stream "~%****************************************~%")
-  (format stream "~%   Run of Pattern Analysis - Structure-2 - on ~S ~S ~S ~S  at ~S h ~S mn,"
+  ;(eval `(printf ,stream "~%****************************************"))
+  (format stream "~%****************************************")
+  (format stream "~% Run of Pattern Analysis - Structure-2 - the ~S ~S ~S ~S  at ~S h ~S mn,"
             (nth 0 date) (nth 1 date) (nth 2 date) (nth 3 date) (nth 4 date) (nth 5 date))
-  (format stream "~%with the following sequence :~%~%")
+  (format stream "~%on the sequence :~%~%")
   (format stream "~S~%" seq)
   (cond ((= (length list-of-pat) 0)
          (format stream "~%No pattern found.~%"))
         ((= (length list-of-pat) 1)
-         (format stream "~%Pattern is :~%~S~%~%" list-of-pat))
-        (t (format stream "~%~S patterns found :~%" (length list-of-pat))
+         (format stream "~%One pattern is :~%~S~%~%" list-of-pat))
+        (t (format stream "~%~S Patterns found :~%" (length list-of-pat))
            (dolist (l list-of-pat)
              (format stream "~S~%" l))
            (format stream "~%")))
-  (format stream "With completion seuil fixed at ~S % ," seuil)
+  (format stream "With completion seuil = ~S % ," seuil)
   (format stream " ~S formes are founded :~%~%" (length analysis))
   (dotimes (a (length analysis))
     (format stream "~S   -> ~,2F % of completion~%" (cdr (nth a analysis)) (car (nth a analysis)))
@@ -1593,7 +1576,7 @@ of n-max (max number of patterns combined in each structure"
       (format stream "~S " (nth k list-of-pat)))
      (format stream "~%~%"))
   (format stream "~%~%")
-  (format stream "~%computation time : ~,3F seconds~%~%       End of Pattern Analysis (Structure-2)~%" run-time))
+  (format stream "~%computation time : ~,3F seconds~%~% End of Pattern Analysis (Structure-2)~%" run-time))
 
 ; ********************* Classification automatique ***********************************
 
@@ -1692,14 +1675,14 @@ The classe number is arbitrary"
     (cond ((equal 'nil centers)
            ;- On initialise les classes arbitrairement...  
            (when (equalp verbose "yes")
-             (format t "~% Random classes initialisation"))
+             (format om-lisp::*om-stream* "~% Random classes initialisation"))
            (setf classes (rand-classes *m* *n-cl*))
            (setf centres (centre-classes matrix classes *m* *n* *n-cl*))
            (setf d-centres (dist-grav2 matrix centres *m* *n* *n-cl*)))
           ;- ou on attribue les classes selon les centres donnes
           (t
            (when (equalp verbose "yes")
-             (format t "~% Using initial centers classes :~% ~S~%" centers))
+             (format om-lisp::*om-stream* "~% Using initial centers classes :~% ~S~%" centers))
            (setf d-centres (dist-grav2 matrix centers *m* *n* *n-cl*))))
            (dotimes (a *m*)
              (dotimes (b *n-cl*)
@@ -1717,14 +1700,14 @@ The classe number is arbitrary"
     (do ((cnt 0 (+ cnt 1)))
         ((= endtest 0)
          (when (equalp verbose "yes")
-           (format t "~&Minimum Local :"))
+           (format om-lisp::*om-stream* "~&Minimum Local :"))
          (if (= alpha? 1)
            (return (to-alpha (mapcar #'1+ classes)))
            (return classes)))
       (when (equalp verbose "yes")
-        (format t "~&Moving classes iter # ~S..." (1+ cnt))
-        (format t "~%Classes :~S~%" classes)
-        (format t "~%Centers are :~S~%~%" centres))
+        (format om-lisp::*om-stream* "~&Moving classes iter # ~S..." (1+ cnt))
+        (format om-lisp::*om-stream* "~%Classes :~S~%" classes)
+        (format om-lisp::*om-stream* "~%Centers are :~S~%~%" centres))
         (when (> cnt 0)
           (setf centres (centre-classes matrix classes *m* *n* *n-cl*)))        
         (when (and (= cnt 0) (not (equal centers 'nil)))
@@ -1752,7 +1735,7 @@ The classe number is arbitrary"
                                                         (list adresse-minima b)))))))))
             (push adresse-minima new-classes))
           (cond ((not (= *n-cl* (length (remove-duplicates new-classes))))
-                 (format t "Warning :~%End of algorithm at loop # ~S~%before stabilization for ~S classes.~%" cnt *n-cl*)
+                 (format om-lisp::*om-stream* "Warning :~%End of algorithm at loop # ~S~%before stabilization for ~S classes.~%" cnt *n-cl*)
                  (setf endtest 0))
                 ((not (equal classes (reverse new-classes)))
                  (setf classes (reverse new-classes))
@@ -1990,7 +1973,7 @@ Seuil, Paris, 1997."
                ((= res 0)
                 (let ((cl (remove-duplicates class)))
                   (if (<= (length cl) 1)
-                    (and (format t "Warning:~%1 classe found. No relative value for that case.~%")
+                    (and (format om-lisp::*om-stream* "Warning:~%1 classe found. No relative value for that case.~%")
                          (abort))
                     (/ (Eshannon class) (log (length cl) 2)))))))
         (t (mapcar #'(lambda (x) (e-shannon x res)) class))))
@@ -2935,22 +2918,22 @@ returns
   :doc  ""
   (case which
     (1 (cond ((not (atom (car list)))
-              (format t "~%ERROR !! different number of elements in the input list !!")
+              (format om-lisp::*om-stream* "~%ERROR !! different number of elements in the input list !!")
               (abort))
              ((reconst-prim list (om::list! start)))))
     (2 (cond ((or (atom (car list))
                   (not (equalp (length (car list)) 2)))
-              (format t "~%ERROR !! different number of elements in the input list !!")
+              (format om-lisp::*om-stream* "~%ERROR !! different number of elements in the input list !!")
               (abort))
              ((reconst-prim+prof list))))
     (3 (cond ((or (atom (car list))
                   (not (equalp (length (car list)) 3)))
-              (format t "~%ERROR !! different number of elements in the input list !!")
+              (format om-lisp::*om-stream* "~%ERROR !! different number of elements in the input list !!")
               (abort))
              ((reconst-prim+prof+val list start))))
     (4 (cond ((or (atom (car list))
                   (not (equalp (length (car list)) 4)))
-              (format t "~%ERROR !! different number of elements in the input list !!")
+              (format om-lisp::*om-stream* "~%ERROR !! different number of elements in the input list !!")
               (abort))
              ((pos+prim+prof+val list start))))))
 ;
@@ -3092,12 +3075,12 @@ returns
       (cond ((and (and (equalp (second (nth x list)) "min")
                        (= x 0))
                   (< start (third (nth x list))))
-             (format t "~%ERROR !! bad starting point because your min is higher than start!!")
+             (format om-lisp::*om-stream* "~%ERROR !! bad starting point because your min is higher than start!!")
              (abort))
             ((and (and (equalp (second (nth x list)) "max")
                        (= x 0))
                   (> start (third (nth x list))))
-             (format t "~%ERROR !! bad starting point because your max is lower than start!!")
+             (format om-lisp::*om-stream* "~%ERROR !! bad starting point because your max is lower than start!!")
              (abort))
             
             ((and (equalp (second (nth x list)) "min")
@@ -3396,13 +3379,13 @@ returns
   :doc ""
   
   (cond ((not (equalp (length (car seq1)) (length (car seq2))))
-         (format t "~%ERROR !! different number of parameters in the two lists !!")
+         (format om-lisp::*om-stream* "~%ERROR !! different number of parameters in the two lists !!")
          (abort)))
   (let* ((ris 0)
          (matrix1 (om::mat-trans seq1))
          (matrix2 (om::mat-trans seq2))
          (wgth (cond ((not (equalp (length wgth) (length (car seq1))))
-                      (format t "~%WARNING : bad definition of wgth; setting all weigths to the first of wgth list...~%Look at the documentation.")
+                      (format om-lisp::*om-stream* "~%WARNING : bad definition of wgth; setting all weigths to the first of wgth list...~%Look at the documentation.")
                       (make-list (length (car seq1)) :initial-element (car wgth)))
                      (t
                       wgth))))
@@ -3426,13 +3409,14 @@ returns
   :doc ""
   
   (cond ((not (equalp (length (car seq1)) (length (car seq2))))
-         (format t "~%ERROR !! different number of parameters in the two lists !!")
+         (format om-lisp::*om-stream* "~%ERROR !! different number of parameters in the two lists !!")
          (abort)))
   (let* ((ris 0)
          (matrix1 (om::mat-trans seq1))
          (matrix2 (om::mat-trans seq2))
          (wgth (cond ((not (equalp (length wgth) (length (car seq1))))
-                      (format t "~%WARNING : bad definition of wgth; setting all weigths to the first of wgth list...~%Look at the documentation.")
+                      (format om-lisp::*om-stream*
+                              "~%WARNING : bad definition of wgth; setting all weigths to the first of wgth list...~%Look at the documentation.")
                       (make-list (length (car seq1)) :initial-element (car wgth)))
                      (t
                       wgth))))
@@ -3515,8 +3499,8 @@ returns
                  (t
                   (* 100 (float (/ (car matcouts) (length seq2)))))))
           (t
-           (format t "~% ERROR : argument scale: ~S does not exist" scale)
-           (format t "~% try arguments 'relative or 'absolute")))))
+           (format om-lisp::*om-stream* "~% ERROR : argument scale: ~S does not exist" scale)
+           (format om-lisp::*om-stream* "~% try arguments 'relative or 'absolute")))))
 ;
 ;
 ;--------------------------------------
@@ -3598,8 +3582,8 @@ returns
                  (t
                   (* 100 (float (/ (* (car matcouts) (+ ins/sup inex)) (length seq2)))))))
           (t
-           (format t "~% ERROR : argument dist: ~S does not exist" scale)
-           (format t "~% try arguments : 'relative or 'absolute")))))
+           (format om-lisp::*om-stream* "~% ERROR : argument dist: ~S does not exist" scale)
+           (format om-lisp::*om-stream* "~% try arguments : 'relative or 'absolute")))))
 ;
 ;
 ;--------------------------------------
@@ -4608,7 +4592,7 @@ range = returns only values (date and frequency)
 (defun aver-window2 (list w)
   (let ((wind ()) (r ()))
     (when (oddp w)
-      (format t "ERROR : window size must be even~&")
+      (format om-lisp::*om-stream* "ERROR : window size must be even~&")
       (abort))
     (dotimes (i (1- (floor (/ (* 2 (length list)) w))) (nreverse r))
       (setf wind 'nil)
@@ -4618,7 +4602,7 @@ range = returns only values (date and frequency)
 (defun aver-window (list w)
   (let ((wind ()) (r ()))
     (when (oddp w)
-      (format t "ERROR : window size must be even~&")
+      (format om-lisp::*om-stream* "ERROR : window size must be even~&")
       (abort))
     (dotimes (i (1- (floor (/ (* 2 (length list)) w))) (nreverse r))
       (setf wind 'nil)
@@ -4676,13 +4660,13 @@ end : ignore last end values."
     (when (equal start 'nil) (setf start 0))
     (when (equal end 'nil) (setf end 0))
     (when (or (<= window 0) (not (integerp window)))
-      (format t "ERROR : wrong window size, must be integer > 0~&")
+      (format om-lisp::*om-stream* "ERROR : wrong window size, must be integer > 0~&")
       (abort))
     (when (and (oddp window) (and (> mode 1) (< mode 4)))
-      (format t "ERROR : window size must be even~&")
+      (format om-lisp::*om-stream* "ERROR : window size must be even~&")
       (abort))
     (when (and (evenp window) (> mode 3))
-      (format t "! Window size changed to ~S samples for median filter~&" (1+ window))
+      (format om-lisp::*om-stream* "! Window size changed to ~S samples for median filter~&" (1+ window))
       )
     (setf list (trunc list start end))
     (cond ((= mode 1)
@@ -5178,7 +5162,7 @@ and looks if a or b is a peak in tree"
                    :test #'equalp))
       (push (list (car (num->alpha (list (1+ n)))) (nth n set)) bag))
     (dolist (b (reverse bag))
-      (format t "~%~S <- ~S" (car b) (cadr b)))
+      (format om-lisp::*om-stream* "~%~S <- ~S" (car b) (cadr b)))
     (values (reverse list) (reverse bag))))
 #|
 (to-flag '(1 2 g 8 tre (5 8) (5 8) tre g 8 1 2 2))
