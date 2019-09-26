@@ -1197,7 +1197,7 @@ out-st is the output stream ('t or file)."
 |#
 
 (defun ptrn-mat-bit (ptrn-pos length)
-  (let ((m (make-array (list (length ptrn-pos) length))))
+  (let ((m (make-array (list (length ptrn-pos) length) :initial-element 0)))
     (dotimes (n (length ptrn-pos) m)
       (dotimes (o (length (cadr (nth n ptrn-pos))))
         (dotimes (p (length (car (nth n ptrn-pos))))
@@ -1452,8 +1452,7 @@ Optional-2:
 -->(((a b c d) (0 9)) ((a b) (0 4 9)))
 |#
 
-(om::defmethod! structure-2 ((seq list) (n-max integer) 
-                             alpha? result 
+(om::defmethod! structure-2 ((seq list) (n-max integer) alpha? result 
                              &optional (length nil) (seuil 10))
   :menuins '((2 (("alpha" 1)
                  ("num"  0)))
@@ -1476,14 +1475,12 @@ result = type of output of analysis
           save -> save all analysis into a file.
 &OPTIONAL
 length = value or list of minimum and maximum values for length of patterns.
-         If nil, lengths of patterns are set up to the half-lenght of the sequence;
+       If nil, max length of patterns are set up to the half-lenght of the sequence;
 seuil = minimum completion percentage of the structure taken in account;
-
 OUTPUT
 Returns an analysis of seq following the repetition criterium for segmentation.
-
-Note : if out-of memory, try successives computations with a smaller value
-of n-max (max number of patterns combined in each structure"
+Note : in cqse of out-of memory, try computations with a smaller value
+of n-max, the max number of patterns combined in each structure."
   (let ((list-patterns (remove-duplicates (pattern-ridond seq length) :test 'equal))
         (date (take-date))
         (time-start (get-internal-real-time))
@@ -1491,56 +1488,41 @@ of n-max (max number of patterns combined in each structure"
         pos-patterns
         mat-bin-patterns
         completion-patterns
-        formes
-        out-file
-        cnp)
-    (when (= result 4)
-      (setf out-file (om::om-choose-new-file-dialog
-                      :prompt "Structure-2 pattern analysis"
-                      )))
+        formes)
     (setf pos-patterns (pos-ptrn-l list-patterns seq))
-    (cond ((eq result 1)
-           pos-patterns)
-          (t
-           (setf mat-bin-patterns (ptrn-mat-bit pos-patterns (length seq)))
-           (cond ((eq result 2)
-                  (list list-patterns
-                        mat-bin-patterns))
-                 (t
-                  (setf cnp (cnp-l (array-dimension mat-bin-patterns 0) n-max))
-                  (setf completion-patterns (mat-ptrn mat-bin-patterns cnp))
-                  (setf cnp nil)
-                  (setf mat-bin-patterns nil)                    
-                  (setf formes (make-form (forma
-                                           (loop for i from 0 to (- (length completion-patterns) 1)
-                                                 collect (list
-                                                          (loop
-                                                            for j
-                                                            from 0 to (- (length (car (nth i completion-patterns))) 1)
-                                                            collect
-                                                            (car (nth (nth j (car (nth i completion-patterns))) pos-patterns)))
-                                                          (cadr (nth i completion-patterns))))
-                                           seq seuil)
-                                          alpha?))
-                  (setf run-time (float (/ (- (get-internal-real-time) time-start)
-                                           internal-time-units-per-second)))
-                  (cond ((eq result 3)
-                         formes)
-                        ((eq result 0)
-                         (to-stream seq list-patterns seuil formes completion-patterns 't date run-time))
-                        ((eq result 4)
-                         (when out-file
-                           (format t "Writing Structure-2 analysis in file : ~S...~%" out-file)
-                           (with-open-file (out-st out-file                          
-                                                   :direction :output
-                                                   :if-exists :supersede
-                                                   :if-does-not-exist :create)
-                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)) ) ))))))))
+    (if (= result 1)
+        (values pos-patterns)
+      (progn
+        (setf mat-bin-patterns (ptrn-mat-bit pos-patterns (length seq)))
+        (if (= result 2)
+            (values (list list-patterns mat-bin-patterns))
+          (progn
+            (setf completion-patterns (mat-ptrn mat-bin-patterns (cnp-l (array-dimension mat-bin-patterns 0) n-max)))
+            (setf mat-bin-patterns nil)
+            (setf formes (make-form (forma
+                                     (loop for i from 0 to (- (length completion-patterns) 1)
+                                           collect (list
+                                                    (loop for j from 0 to (- (length (car (nth i completion-patterns))) 1)
+                                                          collect
+                                                          (car (nth (nth j (car (nth i completion-patterns))) pos-patterns)))
+                                                    (cadr (nth i completion-patterns))))
+                                     seq seuil)
+                                    alpha?))
+            (setf run-time (float (/ (- (get-internal-real-time) time-start) internal-time-units-per-second)))
+            (cond ((= result 3)
+                   formes)
+                  ((= result 0)
+                   (to-stream seq list-patterns seuil formes completion-patterns T date run-time))
+                  ((= result 4)
+                   (let ((out-file (om::om-choose-new-file-dialog :prompt "Save structure-2 pattern analysis to file")))
+                     (print (format nil "Writing Structure-2 analysis in file : ~S..." out-file))
+                     (with-open-file (out-st out-file                          
+                                             :direction :output
+                                             :if-exists :supersede
+                                             :if-does-not-exist :create)
+                       (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)))))))))))
 
-(om::defmethod! forma ((analys list) (seq list) (seuil number))
-  
-  :initvals '(nil nil 1)
-  :icon 128
+(defun forma (analys seq seuil)
   (let ((r ()))
     (dolist (l analys (reverse r))
       (when (>= (cadr l) seuil)
@@ -1570,21 +1552,28 @@ of n-max (max number of patterns combined in each structure"
            (om::mat-trans (list (reverse percent) (dolist (k r (reverse res))
              (push (to-alpha k) res))))))))
 
+(defmacro printf (out string &rest values)
+  (if (equalp T (eval `,out))
+      (print (eval `(format nil ,string . ,values)))
+    (eval `(format out ,string . ,values)))
+  (values))
+
 (defun to-stream (seq list-of-pat seuil analysis compl stream date run-time)
-  (format stream "~%****************************************~%")
-  (format stream "~%   Run of Pattern Analysis - Structure-2 - on ~S ~S ~S ~S  at ~S h ~S mn,"
+  ;(eval `(printf ,stream "~%****************************************"))
+  (format stream "~%****************************************")
+  (format stream "~% Run of Pattern Analysis - Structure-2 - the ~S ~S ~S ~S  at ~S h ~S mn,"
             (nth 0 date) (nth 1 date) (nth 2 date) (nth 3 date) (nth 4 date) (nth 5 date))
-  (format stream "~%with the following sequence :~%~%")
+  (format stream "~%on the sequence :~%~%")
   (format stream "~S~%" seq)
   (cond ((= (length list-of-pat) 0)
          (format stream "~%No pattern found.~%"))
         ((= (length list-of-pat) 1)
-         (format stream "~%Pattern is :~%~S~%~%" list-of-pat))
-        (t (format stream "~%~S patterns found :~%" (length list-of-pat))
+         (format stream "~%One pattern is :~%~S~%~%" list-of-pat))
+        (t (format stream "~%~S Patterns found :~%" (length list-of-pat))
            (dolist (l list-of-pat)
              (format stream "~S~%" l))
            (format stream "~%")))
-  (format stream "With completion seuil fixed at ~S % ," seuil)
+  (format stream "With completion seuil = ~S % ," seuil)
   (format stream " ~S formes are founded :~%~%" (length analysis))
   (dotimes (a (length analysis))
     (format stream "~S   -> ~,2F % of completion~%" (cdr (nth a analysis)) (car (nth a analysis)))
@@ -1593,7 +1582,7 @@ of n-max (max number of patterns combined in each structure"
       (format stream "~S " (nth k list-of-pat)))
      (format stream "~%~%"))
   (format stream "~%~%")
-  (format stream "~%computation time : ~,3F seconds~%~%       End of Pattern Analysis (Structure-2)~%" run-time))
+  (format stream "~%computation time : ~,3F seconds~%~% End of Pattern Analysis (Structure-2)~%" run-time))
 
 ; ********************* Classification automatique ***********************************
 
