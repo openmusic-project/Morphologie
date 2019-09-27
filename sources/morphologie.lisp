@@ -694,7 +694,7 @@ A matrix of distances"
     (setf run-time (float (/ (- (get-internal-real-time) time-start)
                              internal-time-units-per-second)))
     (cond ((eq result 1)
-           (view-str-1 seq res seg alpha? 't date run-time))
+           (view-str-1 seq res seg alpha? om-lisp::*om-stream* date run-time))
           ((eq result 2)
            (when out-file 
              (format om-lisp::*om-stream* "Writing marker analysis in file : ~S...~%" out-file)
@@ -1515,12 +1515,14 @@ of n-max, the max number of patterns combined in each structure."
                    (to-stream seq list-patterns seuil formes completion-patterns om-lisp::*om-stream* date run-time))
                   ((= result 4)
                    (let ((out-file (om::om-choose-new-file-dialog :prompt "Save structure-2 pattern analysis to file")))
-                     (print (format nil "Writing Structure-2 analysis in file : ~S..." out-file))
-                     (with-open-file (out-st out-file                          
-                                             :direction :output
-                                             :if-exists :supersede
-                                             :if-does-not-exist :create)
-                       (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time)))))))))))
+                     (when out-file
+                       (format om-lisp::*om-stream* "Writing Structure-2 analysis in file : ~S..." out-file)
+                       (with-open-file (out-st out-file                          
+                                               :direction :output
+                                               :if-exists :supersede
+                                               :if-does-not-exist :create)
+                         (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))))))))))))
+
 
 (defun forma (analys seq seuil)
   (let ((r ()))
@@ -5164,12 +5166,13 @@ and looks if a or b is a peak in tree"
     (dolist (b (reverse bag))
       (format om-lisp::*om-stream* "~%~S <- ~S" (car b) (cadr b)))
     (values (reverse list) (reverse bag))))
-#|
-(to-flag '(1 2 g 8 tre (5 8) (5 8) tre g 8 1 2 2))
 
+#|
 (om::defmethod! to-flag ((list list))
   :icon 128
   (select-from-list *parameters* (symbol-name database)))
+
+(to-flag '(1 2 g 8 tre (5 8) (5 8) tre g 8 1 2 2))
 |#
 
 
