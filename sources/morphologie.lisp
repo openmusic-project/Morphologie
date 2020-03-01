@@ -131,7 +131,7 @@
   :initvals '(nil nil)
   :icon 128
   :doc "Restituisce tutte le ripetizioni di tutti i sotto-pattern in
-             cui può essere scomposta la sequenza in lista."
+             cui puÀú essere scomposta la sequenza in lista."
   
   (let ((ris nil)
         (x (scom lista n))
@@ -221,7 +221,7 @@
   :icon 128
   :doc "Restituisce tutti i sotto-pattern che compaiono almeno
              due volte (ridondanza) e le cui length sono decise da
-             noi in N ed in più quante volte è ripetuto un pattern"
+             noi in N ed in pi¬ù quante volte ¬è ripetuto un pattern"
   
   (let* ((ris nil)
          (ros nil)
@@ -244,7 +244,7 @@
   :icon 128
   :doc "restituisce la lista delle note di una sequenza
              con il loro indice di presenza e con il guppo 
-             di appartenenza della lista. Il gruppo è una 
+             di appartenenza della lista. Il gruppo ¬è una 
              sotto lista che si stabilisce in windw."
   
   (let* ((which (om::list! which))
@@ -383,7 +383,7 @@ A matrix of distances"
 ;
 ;******************  contrastive analysis ***************************
 ;
-(defparameter **alpha** '(#\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\°))
+(defparameter **alpha** '(#\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\¬°))
 (defparameter **num** '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9))
 
 ;++++++++++++++++  CONVERSIONS
@@ -745,7 +745,7 @@ A matrix of distances"
 (defun to-alpha (list-of-nb)
 "Converts in alpha integer, list of integers, or list of lists of integers.
 1 -> A, 2 -> B etc.
-0 (zero) will converted with °."
+0 (zero) will converted with ¬°."
 (cond ((numberp list-of-nb)
        (when (= 0 list-of-nb) (setf list-of-nb 27))
        (make-string 1 :initial-element (nth (1- list-of-nb) **alpha**)))
@@ -1945,7 +1945,7 @@ IN
 data : list of classes distribution (typically data from class-1;
 OUT
 Shannon entropie value, 0 <= entropie <= (log n 2).
-Cf. J. Wasemberg : L âme de la meduse, idees sur la complexite du monde,
+Cf. J. Wasemberg : L ‚Ä∞me de la meduse, idees sur la complexite du monde,
 Seuil, Paris, 1997."
   (let ((cl (remove-duplicates data))
         (N (length data))
@@ -1965,7 +1965,7 @@ OUT
 Shannon entropie value
 0 <= entropy <= (log n 2) if res = absolute;
 0 <= entropy <= 1.0 if res = relative.
-Cf. J. Wasemberg : L âme de la meduse, idees sur la complexite du monde,
+Cf. J. Wasemberg : L ‚Ä∞me de la meduse, idees sur la complexite du monde,
 Seuil, Paris, 1997."
   (cond ((not (member 'nil (mapcar #'atom class)))
          (if (equalp res "abs")
@@ -1992,7 +1992,7 @@ OUT
 Shannon entropie value
 0 <= entropy <= (log n 2) if res = absolute;
 0 <= entropy <= 1.0 if res = relative.
-Cf. J. Wasemberg : L âme de la meduse, idees sur la complexite du monde,
+Cf. J. Wasemberg : L ‚Ä∞me de la meduse, idees sur la complexite du monde,
 Seuil, Paris, 1997."
   (setf class (str->symb class))
   (E-shannon class res))
@@ -2389,7 +2389,7 @@ returns
   
   :initvals '(nil)
   :icon 128
-  :doc"restituisce solo i comportamenti : max, flex,min più la profondita"
+  :doc"restituisce solo i comportamenti : max, flex,min pi¬ù la profondita"
   
   (let ((r ()))
     
@@ -2404,7 +2404,7 @@ returns
   
   :initvals '(nil)
   :icon 128
-  :doc"restituisce solo i comportamenti : max, flex,min più la profondita"
+  :doc"restituisce solo i comportamenti : max, flex,min pi¬ù la profondita"
   
   (let ((r ()))
     
@@ -2419,7 +2419,7 @@ returns
   
   :initvals '(nil)
   :icon 128
-  :doc "restituisce solo i comportamenti :max, flex,min più la profondita
+  :doc "restituisce solo i comportamenti :max, flex,min pi¬ù la profondita
              ed i valori precisi."
   
   (let ((r ()))
@@ -2780,7 +2780,7 @@ returns
   :icon 128
   :doc "Restituisce no-flex se esiste o un max o un min e
              restituisce il flesso con la sua length se esistono
-             solo dei flessi, in più mette il segno della curva: fle+
+             solo dei flessi, in pi¬ù mette il segno della curva: fle+
              indica che la curva sale e fle- che la curva scende."
   
   
@@ -2882,7 +2882,7 @@ returns
 (om::defmethod! reconst-prim ((list list) (start list))
             
             "Ricostruisce la lista usando min, max, flex 
-             più eventualmente l'indice di profondita"
+             pi¬ù eventualmente l'indice di profondita"
   
  (let ((ris start)
         prim
@@ -2949,7 +2949,7 @@ returns
   :initvals '(nil (0))
   :icon 128
   :doc "Ricostruisce la lista usando min, max, flex 
-             più eventualmente l'indice di profondita"
+             pi¬ù eventualmente l'indice di profondita"
   
   (let ((ris start)
         prim
@@ -2982,7 +2982,7 @@ returns
   :initvals '(nil)
   :icon 128
   :doc "Ricostruisce la lista usando min, max, flex 
-             più eventualmente l'indice di profondita"
+             pi¬ù eventualmente l'indice di profondita"
   
   (let ((ris nil)
         (start 0))
@@ -3023,7 +3023,7 @@ returns
   :initvals '(nil 6000)
   :icon 128
   :doc "Ricostruisce la lista usando min, max, flex
-             più eventualmente l'indice di profondita"
+             pi¬ù eventualmente l'indice di profondita"
   
   (let ((ris nil))
     
@@ -3065,7 +3065,7 @@ returns
   :initvals '(nil 6000)
   :icon 128
   :doc "Ricostruisce la lista usando min, max, flex
-             più eventualmente l'indice di profondita"
+             pi¬ù eventualmente l'indice di profondita"
   
   (let ((ris nil)
         (valore nil))
@@ -3237,8 +3237,8 @@ returns
   :icon 128
   :doc "Studia gli intervalli di due liste e ne fa una analisi.
              Se c'e lo stesso numero di min flex e max ma cambia
-             la pos nella lista allora c'eè una distanza di 1.
-             Se c'e la soppressione di un a primitiva allora c'è 
+             la pos nella lista allora c'e¬è una distanza di 1.
+             Se c'e la soppressione di un a primitiva allora c'¬è 
              una differenza di 2.
              Se c'e l'aggiunta di una primitiva allora c'e una 
              differenza di 2.
@@ -3653,15 +3653,15 @@ returns
 ;
 ;
 (om::defmethod! mean-derivation ((list list) 
-                                 (gr° integer)
+                                 (gr¬° integer)
                                  &optional (note? nil))
   
   :initvals '(nil 0 nil)
   :icon 128
   :doc ""
   
-  (let* ((calcolo (if (= 1 gr°) (med-fix list)
-                      (mean-derivation (med-fix list) (- gr° 1)  note?)))
+  (let* ((calcolo (if (= 1 gr¬°) (med-fix list)
+                      (mean-derivation (med-fix list) (- gr¬° 1)  note?)))
          (con-note (when note?
                      (notes-change calcolo note? 48))))
     
@@ -3710,15 +3710,15 @@ returns
 ;
 (om::defmethod! variable-derivation ((lista list) 
                                      (windw integer)
-                                     (gr° integer))
+                                     (gr¬° integer))
   
   :initvals '(nil 2 1)
   :icon 128
   :doc "Restituisce le dirivate variabili successive secondo il valore
              scelto in GRADO. N rappresenta il valore con cui effettuare la media."
   
-  (if (= 1 gr°) (med-var lista windw)
-      (variable-derivation (med-var lista windw) (- gr° 1) windw)))
+  (if (= 1 gr¬°) (med-var lista windw)
+      (variable-derivation (med-var lista windw) (- gr¬° 1) windw)))
 ;
 ;
 ;--------------------------------------
@@ -3829,7 +3829,7 @@ returns
   :doc "Restituisce l'interposizione di list1 con list2. Se list1 e piu piccola
              di list2 allora la funzione crea un'interposizione di n elementi di list2
              dove (= n (- (length list1) 1)). In questo caso si puo' decidere con il 
-             menù se avere la prima ricorsione per completare list2."
+             men¬ù se avere la prima ricorsione per completare list2."
   
   (case total
     (1 (inter-profile list1 list2))
@@ -3840,17 +3840,17 @@ returns
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;Interposizione di due liste ricorsiva;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
-(om::defmethod! interlock ((list1 list) (list2 list) (gr° integer)) 
+(om::defmethod! interlock ((list1 list) (list2 list) (gr¬° integer)) 
   
   :initvals '(nil nil 1)
   :icon 128
   :doc "Interpone una lista2 alla lista1 e prende 
              aleatoriamente le note della lista2"
   
-  (if (= gr° 1) (inter-profile list1 (om::permut-random list2))
+  (if (= gr¬° 1) (inter-profile list1 (om::permut-random list2))
       (interlock (inter-profile list1 (om::permut-random list2))
                  (permut-circ list2 (1- (length list1)))
-                 (- gr° 1))))
+                 (- gr¬° 1))))
 ;
 ;
 ;--------------------------------------
@@ -3882,17 +3882,17 @@ returns
 ;--------------------------------------
 ;
 ;
-(om::defmethod! new-interlock ((list1 list) (list2 list) (gr° integer))
+(om::defmethod! new-interlock ((list1 list) (list2 list) (gr¬° integer))
   
   :initvals '(nil nil 1)
   :icon 128
   :doc  "Interpone una lista2 alla lista1 e prende 
              aleatoriamente le note della lista2"
   
-  (if (= gr° 1) (new-inter-profile list1 (om::permut-random list2))
+  (if (= gr¬° 1) (new-inter-profile list1 (om::permut-random list2))
       (new-interlock (new-inter-profile list1 (om::permut-random list2))
                      (permut-circ list2 (1- (length list1)))
-                     (- gr° 1))))
+                     (- gr¬° 1))))
 ;
 ;
 ;
@@ -3952,9 +3952,9 @@ returns
   :initvals '(1 nil)
   :icon 128
   :doc "Restituisce un elemento se questo compare all'interno del range.
-           Se l'elemento è escluso allora lo traspone in modo tale che sia
+           Se l'elemento ¬è escluso allora lo traspone in modo tale che sia
            il piu vicino possibile o al limite superiore o a quello inferiore.
-           Se il limite è DO-SOL allora Mi viene incluso, SI viene trasposto
+           Se il limite ¬è DO-SOL allora Mi viene incluso, SI viene trasposto
            sotto il DO e il SOL# viene trasposto sopra il SOL."
   
   (let ((max (g-max range))
@@ -3979,11 +3979,11 @@ returns
 (defun cor-ott-list (elmt range)
         
           "Restituisce un elemento se questo compare all'interno del range.
-           Se l'elemento è escluso allora lo traspone in modo tale che sia
-           il più vicino possibile o al limite superiore o a quello inferiore.
-           Se il limite è DO-SOL allora Mi viene incluso, SI viene trasposto
+           Se l'elemento ¬è escluso allora lo traspone in modo tale che sia
+           il pi¬ù vicino possibile o al limite superiore o a quello inferiore.
+           Se il limite ¬è DO-SOL allora Mi viene incluso, SI viene trasposto
            sotto il DO e il SOL# viene trasposto sopra il SOL.La differenza
-           con 'CORRETTORE' è che questo modulo agisce su una lista intera."
+           con 'CORRETTORE' ¬è che questo modulo agisce su una lista intera."
         
         (let ((ris nil))
           (dolist (y elmt)
@@ -3999,7 +3999,7 @@ returns
   :initvals '(nil nil)
   :icon 128
   :doc "E' meglio di transpoct di Esquisse. Infatti attua lo stesso
-             procedimento ma traspone una nota non inclusa nel range il più
+             procedimento ma traspone una nota non inclusa nel range il pi¬ù
              vicino o al limite superiore o a quello inferiore."
   
   (cor-ott-list (mio-transpoct list range) range))
@@ -4083,7 +4083,7 @@ returns
 ;
 (defun interno (elmt range)
 
-          "Restituisce l'elemento se è incluso nel 'range' e nil 
+          "Restituisce l'elemento se ¬è incluso nel 'range' e nil 
            se non e incluso."
 
   (if (<= (g-min range) elmt (g-max range)) elmt nil))
@@ -4116,7 +4116,7 @@ returns
   :initvals '(nil 0 1)
   :icon 128
   :doc  "Restituisce la rifleesione delle note che sono superiori o inferiori
-             al valore indicato con 'value'. Il menù permette di selezionare se si
+             al valore indicato con 'value'. Il men¬ù permette di selezionare se si
              vuole una riflessione superiore o inferiore"
   (case up/down
     (1 (malt-mod+ ls value))
@@ -4317,7 +4317,7 @@ returns
   :initvals '(nil nil)
   :icon 128
   :doc  "Restituisce una trasposizione della lista mantenendo le altezze
-             assolute all'interno del 'range. Se un elemento non è incluso 
+             assolute all'interno del 'range. Se un elemento non ¬è incluso 
              nel 'range', allora viene tolto dal risultato."
   
   (let ((ris nil))
@@ -4338,8 +4338,8 @@ returns
   :initvals '(nil nil 1)
   :icon 128
   :doc "E' la funzione che cambia un ritmo in funzione del menu <mode?>
-             Se <mode?> è su mod, questa funzione restituisce i multipli 
-             dei valori in <moduli>; se è su ptrn allora retituisce una 
+             Se <mode?> ¬è su mod, questa funzione restituisce i multipli 
+             dei valori in <moduli>; se ¬è su ptrn allora retituisce una 
              struttura ritmica che utlilizza solamente i valori in <modulo>"
   
   (let ((modulo (om::list! modulo)))
@@ -4359,7 +4359,7 @@ returns
   :icon 128
   :doc "Se in vals c'e un solo valore allora calcola una 
              approssimazione ritmica in modo tale che tutti i valori 
-             risultino un multiplo di vals. Se invece in vals c'è una 
+             risultino un multiplo di vals. Se invece in vals c'¬è una 
              lista di valori allora approssima tutti i valori in rtm
              con i valori di vals."
   
@@ -4417,8 +4417,8 @@ returns
   :initvals '(nil 1)
   :icon 128
   :doc "Questa funzione prende ogni elemento di rht e restituisce
-             lo stesso elemento se il (mod rht val) è uguale a 0
-             altrimenti lo approssima al poù vicino"
+             lo stesso elemento se il (mod rht val) ¬è uguale a 0
+             altrimenti lo approssima al po¬ù vicino"
   
   (let ((ris nil))
     
@@ -4462,7 +4462,7 @@ returns
 (om::defmethod! nota-vicina ((list list) (ref number)) 
   :initvals '(nil 1)
   :icon 128
-  :doc "Prende l'intervallo più piccolo di una lista."
+  :doc "Prende l'intervallo pi¬ù piccolo di una lista."
   
   (let* ((intervalli (tutti-int list ref))
          (piccolo (segno+picc intervalli)))
