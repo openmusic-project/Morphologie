@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:51:37")
-  (:modified "2019/09/24 0:53:30"))
+  (:modified "2019/09/25 14:06:28"))
  (:window (:size (639 367)) (:position (484 506)))
  (:grid nil)
  (:lock nil)
@@ -14,7 +14,7 @@
    (:x 70)
    (:y 252)
    (:w 205)
-   (:h 64)
+   (:h 58)
    (:fgcolor (:color 0 0 0 1.0))
    (:bgcolor nil)
    (:border 0)
@@ -39,6 +39,7 @@
     "In absolute mode gives the minimum editing cost to go from seq1 to seq2")
    (:id 1))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "DISTANCE" "MORPH"))
    (:group-id nil)
@@ -103,7 +104,7 @@
    (:x 356)
    (:y 192)
    (:w 197)
-   (:h 72)
+   (:h 64)
    (:fgcolor (:color 0 0 0 1.0))
    (:bgcolor nil)
    (:border 0)
@@ -154,6 +155,7 @@
    (:value (:list a b c d a b c t r o p))
    (:id 5))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "DISTANCE" "MORPH"))
    (:group-id nil)

@@ -56,7 +56,6 @@
         ("Utilities" nil nil (delta
                                 smooth
                                 midiseq->alpha
-                                to-flag
                                 rep-by-flag
                                 mc->alpha
                                 num->alpha

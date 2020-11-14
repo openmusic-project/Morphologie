@@ -5,7 +5,7 @@
  (:doc "")
  (:info
   (:created "2019/09/24 0:34:20")
-  (:modified "2019/09/24 0:36:33"))
+  (:modified "2019/09/25 14:05:30"))
  (:window (:size (551 424)) (:position (253 253)))
  (:grid nil)
  (:lock nil)
@@ -42,7 +42,7 @@
    (:reference cons)
    (:group-id nil)
    (:name "aux")
-   (:x 51)
+   (:x 52)
    (:y 34)
    (:w 394)
    (:h 76)
@@ -156,7 +156,7 @@
     (:output (:name "LOFFSET") (:reactive nil))
     (:output (:name "LDUR") (:reactive nil))
     (:output (:name "lchan") (:reactive nil)))
-   (:window (:size nil) (:position nil))
+   (:window (:size (nil nil)) (:position (nil nil)))
    (:edition-params (:staff :g))
    (:value
     (:object
@@ -950,6 +950,7 @@
        (:lport nil)))))
    (:id 3))
   (:box
+   (:library "Morphologie")
    (:type :function)
    (:reference (:symbol "MIN-FLEX-MAX" "MORPH"))
    (:group-id nil)
