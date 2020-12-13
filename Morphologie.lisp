@@ -70,7 +70,7 @@
 
 (om::fill-library *subpackages-morpho*)
 
-(om::set-lib-release 1.0)
+(om::set-lib-release 1.1)
 
 (print "
 ;;            Morphologie
