@@ -4984,27 +4984,30 @@ analyse-contrastive =>
 ;************************ NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ********************
 ;************************ NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ** NEW ********************
 
-(om::defmethod! draw-tree ((tree list))
-:doc "Draw in a new window a graphic representation of the tree.
-Tree : tree list from Prim-tree"
-:icon 128
-  (om::om-make-window 'tree-window :tree tree))
+(defclass tree-window (om::om-window) ()) 
 
-(defclass tree-window (om::om-window) 
+(defclass tree-view (om::om-view) 
   ((tree :initform nil :initarg :tree :accessor tree)) )
 
-(defmethod om::om-draw-contents ((self tree-window))
-  (call-next-method)
-  (let ((h (om::om-point-h (om::om-view-size self)))
-        (v (om::om-point-v (om::om-view-size self))))
-    ;(om::om-with-focused-view self
-    ;  (om::om-erase-rect-content 0 0 h v))
-    ;(om::om-set-font self (om::om-make-font "times" 10))
-    (make-graph-tree self (tree self))))
 
-(defmethod om::om-resize-window ((self tree-window) where)
+(om::defmethod! draw-tree ((tree list))
+  :doc "Draw in a new window a graphic representation of the tree.
+Tree : tree list from Prim-tree"
+  :icon 128
+  (oa::om-show-window 
+   (oa::om-make-window 'tree-window 
+                       :subviews (list (oa::om-make-view 'tree-view :tree tree))
+                       :size (oa::om-make-point 500 500)
+                       )))
+
+(defmethod om::om-draw-contents ((self tree-view)) 
   (call-next-method)
-  (om::om-invalidate-view self))
+  (make-graph-tree self (tree self)))
+
+(defmethod om::om-window-resized ((self tree-window) size)
+  (call-next-method)
+  (oa::om-set-view-size (car (oa::om-subviews self)) size)
+  (om::om-invalidate-view (car (oa::om-subviews self))))
 
 
 (defun sommet-p (n tree)
