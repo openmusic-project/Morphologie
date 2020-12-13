@@ -16,19 +16,6 @@
 
 ;quelques modules -provisoire-
 
-(defmethod list-part ((list list) &optional (ncol 2)) 
-  "partitions <list> in <ncol> lists containing the elements modulo <ncol>"
-  (let ((vector (make-array  ncol )) res)
-    (om::while list 
-           (om::for (i 0 1 (1- ncol))
-             (and list (om::vset vector i (push (pop list) (om::vref vector i))))))
-    (om::for (i 0 1 (1- ncol))
-      (push (remove nil (nreverse (om::vref vector i))) res))
-    (nreverse res)))
-
-(defmethod list-modulo ((list list) &optional (ncol 2)) 
-  (list-part list ncol))
-
 (defun less-deep-mapcar (fun  list? &rest args)
   "Applies <fun> to <list?> <args> if <list?> is a one-level list .
    Mapcars <fun> to <list?> <args> if <list?> is a multi-level list. "
@@ -615,7 +602,7 @@ A matrix of distances"
       (setf c (segnum1 s))
       (setf a (remove-duplicates (om::flat-once (car c))))
       (setf b (cdr c))
-      (setf a (om::mat-trans (reverse (list-modulo a 2))))
+      (setf a (om::mat-trans (reverse (om::list-modulo a 2))))
       (push (list a (car b)) res))
     (list (car list) (reverse res))))
 
