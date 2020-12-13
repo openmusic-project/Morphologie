@@ -149,9 +149,11 @@
   (let ((ris nil)
         (x (scom lista n))
         y)
-    (om::while x
-      (when (find  (setf y (pop x)) x :test 'equal)
-        (push y ris))) (reverse ris)))
+    (loop while x
+          do (when (find  (setf y (pop x)) x :test 'equal)
+               (push y ris))) (reverse ris)
+    ))
+
 ;
 ;
 ;--------------------------------------
@@ -218,7 +220,7 @@
         (x (risperiamo lista n))
         y)
     
-    (om::while x
+    (loop while x do 
       (if (find (setf y (pop x)) x :test 'equal)
         (push y ris))) (nreverse ris)))
 ;
