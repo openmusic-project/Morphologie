@@ -68,7 +68,6 @@
      "morph::delta"
      "morph::smooth"
      "morph::midiseq->alpha"
-     "morph::to-flag"
      "morph::rep-by-flag"
      "morph::mc->alpha"
      "morph::num->alpha"

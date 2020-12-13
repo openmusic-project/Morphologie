@@ -5211,11 +5211,12 @@ and looks if a or b is a peak in tree"
     (values (reverse list) (reverse bag))))
 #|
 (to-flag '(1 2 g 8 tre (5 8) (5 8) tre g 8 1 2 2))
-|#
 
 (om::defmethod! to-flag ((list list))
   :icon 128
   (select-from-list *parameters* (symbol-name database)))
+|#
+
 
 (defun rep-by-flag1 (dist list flags)
   (dotimes (n (length list) dist)
