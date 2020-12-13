@@ -412,6 +412,7 @@ A matrix of distances"
 (defun list-char-score (lcs)
   (setf (car lcs) (list (make-string 1 :initial-element (car lcs)) (cadr lcs))))
 
+
 (defun posofspaces (string)
   (let ((pos ()))
     (dotimes (n (length string) (nreverse (append (list (length string)) pos)))
@@ -658,21 +659,21 @@ A matrix of distances"
   :initvals '(nil 1 1 1)
   :icon 128
   :doc  "Donne toutes les structures possibles d'une sequence de nombres ou de symboles 
-selon une segmentation contrastive.
+ selon une segmentation contrastive.
 
-INPUT
-seq : sequence de symboles ou nombres (liste);
-alpha? : resultat en mode alphabetique ou numerique (YES NO), optional;
-lisse? : suppression des elts concomitents identiques dans seq (YES, NO), optional.
-result : short = liste des criteres de segmentation et leur segmentation respective;
+ INPUT
+ seq : sequence de symboles ou nombres (liste);
+ alpha? : resultat en mode alphabetique ou numerique (YES NO), optional;
+ lisse? : suppression des elts concomitents identiques dans seq (YES, NO), optional.
+ result : short = liste des criteres de segmentation et leur segmentation respective;
          exten = analyse detaillee;
          save  = analyse detaillee ecrite en un fichier texte.
 
-OUTPUT
-en mode short, pour le traitement de l'analyse, liste de liste selon le format :
+ OUTPUT
+ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
 
-((criteres de segmentation)
-(forme selon critere)...)"
+ ((criteres de segmentation)
+ (forme selon critere)...)"
   
   (let ((seg ())
         (res ())
@@ -795,7 +796,6 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
 "Catchs the results of fonction #'analyse-contrastive."
   (multiple-value-bind (structs crits ptrns)  (analyse-contrastive seq lisse?)
     (list structs crits ptrns)))
-
 
 
 (defun ac+complete (seq lisse1 prof level lisse2 arbores)
