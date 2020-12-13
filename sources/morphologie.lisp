@@ -9,7 +9,9 @@
 ;*                                                                                                           *
 ;*************************************************************************************************************
  
-(defpackage "MORPH")
+(defpackage "MORPH"
+  (:use "COMMON-LISP" "CL-USER"))
+
 (in-package "MORPH")
 
 ;quelques modules -provisoire-

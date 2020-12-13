@@ -6,10 +6,7 @@
 ;;
 ;;
 
-(defpackage "MORPH"
-  (:use "COMMON-LISP" "OpenMusic" "CL-USER"))
-
-(in-package "MORPH")
+(in-package :om)
 
 (compile&load (om::om-relative-path '("sources") "morphologie"))
 
