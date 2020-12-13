@@ -683,7 +683,7 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
     (when (eq result 2)
       (setf out-file (om::om-choose-new-file-dialog
                       :prompt "Structure-1 Mark Analysis"
-                      :button-string "save as")))
+                      )))
     (if (eq lisse? 1)
       (setf seg (group (seg/contrast (lisse seq))))
       (setf seg (group (seg/contrast seq))))
@@ -1497,7 +1497,7 @@ of n-max (max number of patterns combined in each structure"
     (when (= result 4)
       (setf out-file (om::om-choose-new-file-dialog
                       :prompt "Structure-2 pattern analysis"
-                      :button-string "save as")))
+                      )))
     (setf pos-patterns (pos-ptrn-l list-patterns seq))
     (cond ((eq result 1)
            pos-patterns)
