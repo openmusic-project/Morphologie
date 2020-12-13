@@ -733,9 +733,6 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
             (take-criteria analysis)
             (take-patterns analysis))))
 
-(defun take-result-of-ac (seq lisse?)
-  (multiple-value-bind (structs ptrns crits)  (analyse-contrastive seq lisse?)
-    (list structs ptrns crits)))
        
 (defun convert-to-alpha (list-of-numbers)
   (let ((string (make-string (1- (* 2 (length list-of-numbers)))
@@ -1093,13 +1090,6 @@ out-st is the output stream ('t or file)."
          (format t "~% Error : scores-level-0 : bad form on structures for level 0.~%")
          (abort))))
 
-(defun string-to-list (string)
-  (let ((lstring ()))
-    (dotimes (n (length string) (nreverse lstring))
-        (push (elt string n) lstring))))
-
-(defun list-char-score (lcs)
-  (setf (car lcs) (list (make-string 1 :initial-element (car lcs)) (cadr lcs))))
 
 
 (om::defmethod! rma-1-scores ((structures list))
