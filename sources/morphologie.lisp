@@ -695,14 +695,15 @@ en mode short, pour le traitement de l'analyse, liste de liste selon le format :
     (cond ((eq result 1)
            (view-str-1 seq res seg alpha? 't date run-time))
           ((eq result 2)
-           (format t "Writing marker analysis in file : ~S...~%" out-file)
-           (with-open-file (out-st out-file                          
-                                   :direction :output
-                                   :if-exists :supersede
-                                   :if-does-not-exist :create)
-             (view-str-1 seq res seg alpha? out-st date run-time))
+           (when out-file 
+             (format t "Writing marker analysis in file : ~S...~%" out-file)
+             (with-open-file (out-st out-file                          
+                                     :direction :output
+                                     :if-exists :supersede
+                                     :if-does-not-exist :create)
+               (view-str-1 seq res seg alpha? out-st date run-time))
            ;(set-mac-file-creator out-file 'ttxt)
-           (format t "DONE~%"))
+             (format t "DONE~%")))
           ((eq result 0)
            (format t "~%   Marker analysis (computation time = ~S s.) :~%" run-time)
            (if (eq alpha? 0)
@@ -1529,14 +1530,17 @@ of n-max (max number of patterns combined in each structure"
                         ((eq result 0)
                          (to-stream seq list-patterns seuil formes completion-patterns 't date run-time))
                         ((eq result 4)
-                         (print (format nil "Writing Structure-2 analysis in file : ~S...~%" out-file))
-                         (with-open-file (out-st out-file                          
-                                                 :direction :output
-                                                 :if-exists :supersede
-                                                 :if-does-not-exist :create)
-                           (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))
-                        
-                         ))))))))
+                         (when out-file
+                           (print (format nil "Writing Structure-2 analysis in file : ~S...~%" out-file))
+                           (with-open-file (out-st out-file                          
+                                                   :direction :output
+                                                   :if-exists :supersede
+                                                   :if-does-not-exist :create)
+                             (to-stream seq list-patterns seuil formes completion-patterns out-st date run-time))
+                           )
+                         )))
+                 )))
+    ))
 
 (om::defmethod! forma ((analys list) (seq list) (seuil number))
   
