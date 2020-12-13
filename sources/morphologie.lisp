@@ -5006,8 +5006,6 @@ Tree : tree list from Prim-tree"
   (call-next-method)
   (om::om-invalidate-view self))
 
-(defun draw-string (x y str)
-  (om::om-draw-string x y str))
 
 (defun sommet-p (n tree)
 "n is a list from tree, i.e. (a b distance)
@@ -5146,30 +5144,24 @@ and looks if a or b is a peak in tree"
                                   (list (car a)
                                         (+ 20 (* scale (- (cadr a) minx))) 
                                         (+ 20 (* scale (- (caddr a) miny))))) coordinates))
-    ;(om::om-set-view-size window (om::om-make-point (+ (round (apply #'max (mapcar #'cadr coordinates))) 20)
-    ;                                            (+ (round (apply #'max (mapcar #'caddr coordinates))) 20)))
-    (om::om-with-focused-view window      
+    (oa::om-with-focused-view window   
       ;;first place points in the window
       (dolist (coord coordinates)
-        (draw-string
+        (om::om-draw-string
          (+ *eps* (round (+ morph::*x* (cadr coord))))
          (- (round (+ morph::*y* (caddr coord))) morph::*eps*)
          (if (stringp (car coord))
            (car coord)
-           (symbol-name (car coord)))))
+           (symbol-name (car coord)))
+         ))
       ;;then draw lines
       (dolist (pt ntree)
-          (let ((co1 (take-coord (car pt) coordinates))
-                (co2 (take-coord (cadr pt) coordinates)))
-;;;          (move-to window
-;;;                   (round (+ morph::*x* (car co1)))
-;;;                   (round (+ morph::*y* (cadr co1))))
-;;;          (line-to window
-;;;                    (round (+ morph::*x* (car co2)))
-;;;                        (round (+ morph::*y* (cadr co2))))
-            (om::om-draw-line (round (+ morph::*x* (car co1))) (round (+ morph::*y* (cadr co1)))
-                                                (round (+ morph::*x* (car co2))) (round (+ morph::*y* (cadr co2))))
-            )))))
+        (let ((co1 (take-coord (car pt) coordinates))
+              (co2 (take-coord (cadr pt) coordinates)))
+          (om::om-draw-line (round (+ morph::*x* (car co1))) (round (+ morph::*y* (cadr co1)))
+                            (round (+ morph::*x* (car co2))) (round (+ morph::*y* (cadr co2))))
+          ))
+      )))
 
 (defun etiquet (list)
   (let ((set (remove-duplicates (reverse list) :from-end '0 :test #'equalp)))
