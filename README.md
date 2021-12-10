@@ -1,6 +1,6 @@
 # Morphologie
 
-Analysis fonctions, pattern recognition and morphological classification of geometric profiles in OpenMusic.
+Analysis functions, pattern recognition and morphological classification of geometric profiles in OpenMusic.
 
 By Jacopo Baboni Schilingi & Frederic Voisin
 
